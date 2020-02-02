@@ -4,6 +4,8 @@
 
 #include "cocos2d.h"
 
+class SpriteFactory;
+
 class GameScene : public cocos2d::Scene
 {
 public:

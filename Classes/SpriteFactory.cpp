@@ -1,70 +1,73 @@
 #include "SpriteFactory.h"
 #include "SpriteBase.h"
+#include "Config.h"
+#include "SpaceShip.h"
+#include "EnemyShip.h"
+#include "Rocket.h"
 
-SpriteFactory* SpriteFactory::_pInstance = nullptr;
+SpriteFactory* SpriteFactory::_instance = NULL;
 
-/**
-* Static method for accessing class instance.
-*
-* @return AgentPool instance.
-*/
+SpriteBase* SpriteFactory::create(int kind)
+{
+	if (_pool.empty()) {
+		switch (kind)
+		{
+			case TAG_SPACESHIP:
+			{
+				return new SpaceShip(SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT, SPACE_SHIP_PATH);
+			}
+			case TAG_ROCKET:
+			{
+				return new Rocket(DEFAULT_ROCKET_POWER, ROCKET_WIDTH, ROCKET_HEIGHT, ROCKET_PATH);
+			}
+			case ENEMY_SHIP_HEAVY:
+			{
+				return new EnemyShip(HEAVY_ENEMY_HEALTH, HEAVY_ENEMY_WIDTH, HEAVY_ENEMY_HEIGHT, HEAVY_ENEMY_PATH);
+			}
+			case ENEMY_SHIP_LIGHT:
+			{
+				return new EnemyShip(LIGHT_ENEMY_HEALTH, LIGHT_ENEMY_WIDTH, LIGHT_ENEMY_HEIGHT, LIGHT_ENEMY_PATH);
+			}
+			default:
+				return nullptr;
+		}
+	}
+
+	// return first object as a default
+	if (kind == -1)
+	{
+		SpriteBase* pFront = _pool.front();
+		_pool.pop_back();
+		return pFront;
+	}
+	return findFirstSpriteWithKind(kind);
+}
+
+SpriteBase* SpriteFactory::findFirstSpriteWithKind(int kind)
+{
+	std::list<SpriteBase*>::iterator it = _pool.begin();
+	int nSpriteCnt = _pool.size();
+	for (int i = 0; i < nSpriteCnt; i++)
+	{
+		SpriteBase* ithItem = *it;
+		if (ithItem->spriteKind() == kind) {
+			_pool.remove(ithItem);
+			return ithItem;
+		}
+		advance(it, 1);
+	}
+	return nullptr;
+}
+
+void SpriteFactory::push(SpriteBase* p)
+{
+	_pool.push_back(p);
+}
+
 SpriteFactory* SpriteFactory::instance()
 {
-	if (_pInstance == nullptr) {
-		_pInstance = new SpriteFactory;
+	if (_instance == NULL) {
+		_instance = new SpriteFactory();
 	}
-	return _pInstance;
-}
-
-/**
-* Returns instance of agent with given agent type.
-*
-* New agent will be created if all the agents
-* were used at the time of the request.
-*
-* @return agent instance.
-*/
-SpriteBase* SpriteFactory::getAgent(int atag)
-{
-	if ((atag == AGENT_ROCKET_TAG && _rocketVec .empty()) 
-			|| (atag == AGENT_ENEMY_TAG && _enemyVec.empty())
-			|| atag == AGENT_SELF_TAG)
-	{
-		return SpriteBase::createSprite(atag);
-	}
-	else if (atag == AGENT_ROCKET_TAG) 
-	{
-		SpriteBase* resource = _rocketVec.front();
-		_rocketVec.pop_front();
-		return resource;
-	}
-	else if (atag == AGENT_ENEMY_TAG)
-	{
-		SpriteBase* resource = _enemyVec.front();
-		_enemyVec.pop_front();
-		return resource;
-	}
-}
-
-/**
-* Return agent back to the pool.
-*
-* The agent must be initialized back to
-* the default settings before someone else
-* attempts to use it.
-*
-* @param object object instance.
-* @return void
-*/
-void SpriteFactory::returnAgent(SpriteBase* object)
-{
-	object->reset();
-	if (object->getTag() == AGENT_ROCKET_TAG) 
-	{
-		_rocketVec.push_back(object);
-	}
-	else if (object->getTag() == AGENT_ENEMY_TAG)
-	{
-		_enemyVec.push_back(object);
-	}
+	return _instance;
 }

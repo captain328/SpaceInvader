@@ -1,68 +1,29 @@
 
 #include "SpriteBase.h"
-
+#include "Config.h"
 USING_NS_CC;
 
-SpriteBase* SpriteBase::createSprite(int atag)
+SpriteBase::SpriteBase(float w, float h, std::string path)
 {
-	SpriteBase* sprite = new SpriteBase;
-	if (sprite != nullptr) 
-	{
-		sprite->setTag(atag);
-		sprite->init();
-		//sprite->autorelease();
-	}
-    return sprite;
-}
+	m_nSpriteKind = TAG_GENERAL;
 
-// on "init" you need to initialize your instance
-bool SpriteBase::init()
-{
-	// Set resource file name according to its type
-	std::string rsrcFileName;
-	
-	if (getTag() == AGENT_SELF_TAG)
+	if (!Sprite::initWithFile(path))
 	{
-		rsrcFileName = StringUtils::format("self.png");
-	}
-	else if (getTag() == AGENT_ENEMY_TAG)
-	{
-		rsrcFileName = StringUtils::format("enemy1.png");
-	}
-	else if (getTag() == AGENT_ROCKET_TAG)
-	{
-		rsrcFileName = StringUtils::format("rocket.png");
+		m_bValid = false;
+		return;
 	}
 
-    if ( !Sprite::initWithFile(rsrcFileName) )
-    {
-        return false;
-    }
-	
-	// if this type is enemy, then flip y
-	if (getTag() == AGENT_SELF_TAG)
-	{
-		setContentSize(cocos2d::Size(SHIP_WIDTH, SHIP_HEIGHT));
-	}
-	else if (getTag() == AGENT_ENEMY_TAG)
-	{
-		setContentSize(cocos2d::Size(SHIP_WIDTH, SHIP_HEIGHT));
-		setFlippedY(true);
-	}
-	else if (getTag() == AGENT_ROCKET_TAG)
-	{
-		setContentSize(cocos2d::Size(ROCKET_WIDTH, ROCKET_HEIGHT));
-	}
+	setContentSize(cocos2d::Size(w, h));
 
 	// set physics body to simulate collision
-	auto rectBody = PhysicsBody::createBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT);
+	PhysicsBody* rectBody = PhysicsBody::createBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT);
 	rectBody->setContactTestBitmask(true);
 	this->setPhysicsBody(rectBody);
-
-    return true;
+	m_bValid = true;
 }
 
-void SpriteBase::reset()
+void SpriteBase::SetSpriteKind(int kind)
 {
-	//RESET!
+	m_nSpriteKind = kind;
+	setTag(kind);
 }

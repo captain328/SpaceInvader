@@ -11,16 +11,20 @@ class SpriteFactory
 {
 private:
 	SpriteFactory() {}
+	static SpriteFactory* _instance;
+
+public:
+	virtual SpriteBase* create(int kind = -1);
+	void push(SpriteBase*);
 
 public:
 	static SpriteFactory* instance();
-	SpriteBase* getAgent(int);
-	void returnAgent(SpriteBase*);
 
 private:
-	static SpriteFactory* _pInstance;
-	std::list<SpriteBase*> _enemyVec;
-	std::list<SpriteBase*> _rocketVec;
+	SpriteBase* findFirstSpriteWithKind(int kind);
+
+protected:
+	std::list<SpriteBase*> _pool;
 };
 
 #endif

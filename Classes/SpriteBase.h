@@ -3,15 +3,17 @@
 #define __Agent_SPRITE_H__
 
 #include "cocos2d.h"
-#include "Config.h"
 
 class SpriteBase : public cocos2d::Sprite
 {
+private:
+	bool m_bValid;
+	int m_nSpriteKind;
 public:
-    static SpriteBase* createSprite(int);
-
-    virtual bool init();
-	void reset();
+	SpriteBase(float w, float h, std::string path);
+	bool isValid() { return m_bValid; }
+	int spriteKind() { return m_nSpriteKind; }
+	void SetSpriteKind(int kind);
 };
 
 #endif // __AGENT_SPRITE_H__

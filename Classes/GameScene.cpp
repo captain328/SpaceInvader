@@ -4,6 +4,9 @@
 #include "SpriteBase.h"
 #include "SpriteFactory.h"
 #include "Config.h"
+#include "SpaceShip.h"
+#include "Rocket.h"
+#include "EnemyShip.h"
 
 USING_NS_CC;
 
@@ -85,20 +88,20 @@ bool GameScene::init()
 	}
 
 	// show progress bar
-	auto frame = Sprite::create("prog_frame.png");
+	auto frame = Sprite::create(PROGRESS_FRAME_PATH);
 	frame->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
 	frame->setScaleX(0.5f);
 	frame->setPosition(Point(dispLabel->getPositionX() - 35.f, dispLabel->getPositionY() - 20.f));
 	this->addChild(frame, 10);
 
-	m_progBarSprite = Sprite::create("prog_bar.png");
+	m_progBarSprite = Sprite::create(PROGRESS_BAR_PATH);
 	m_progBarSprite->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
 	m_progBarSprite->setContentSize(Size(0.f, 24.f));
 	m_progBarSprite->setPosition(Point(frame->getPositionX() + 4.f, frame->getPositionY() - 3.f));
 	this->addChild(m_progBarSprite, 10);
 
     // add background
-    auto sprite = Sprite::create("background.png");
+    auto sprite = Sprite::create(BACKGROUND_PATH);
     if (sprite == nullptr) {
 		printf("'background.png' is missing.");
     }
@@ -113,13 +116,13 @@ bool GameScene::init()
     }
 
 	// add space ship
-	auto selfSprite = SpriteFactory::instance()->getAgent(AGENT_SELF_TAG);
-	if (selfSprite == nullptr) {
+	SpaceShip* spaceShip = (SpaceShip*)SpriteFactory::instance()->create(TAG_SPACESHIP);
+	if (spaceShip == nullptr) {
 		printf("self ship creation failed.");
 	}
 	else {
-		selfSprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, SHIP_HEIGHT * 3 + origin.y));
-		this->addChild(selfSprite, 1);
+		spaceShip->setPosition(Vec2(visibleSize.width / 2 + origin.x, SPACE_SHIP_HEIGHT * 3 + origin.y));
+		this->addChild(spaceShip, 1);
 	}
 	
 	m_isTouchBegan = false;
@@ -142,11 +145,6 @@ bool GameScene::init()
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
-	// define schedulers
-	//generateEnemies();
-	/*schedule(schedule_selector(GameScene::generateEnemies), 30.f);*/
-	//schedule(schedule_selector(GameScene::generateRockets), NORMAL_SPEED);
-	//scheduleOnce(schedule_selector(GameScene::enableSpecialMenuItem), 20.f);
 	scheduleUpdate();
     return true;
 }
@@ -176,34 +174,34 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 	Node* shapeA = contact.getShapeA()->getBody()->getNode();
 	Node* shapeB = contact.getShapeB()->getBody()->getNode();
 
-	if ((shapeA->getTag() == AGENT_ROCKET_TAG 
-			&& shapeB->getTag() == AGENT_ENEMY_TAG)
-		|| (shapeB->getTag() == AGENT_ROCKET_TAG
-			&& shapeA->getTag() == AGENT_ENEMY_TAG))
+	if ((shapeA->getTag() == TAG_ROCKET 
+			&& shapeB->getTag() == TAG_ENEMY_SHIP)
+		|| (shapeB->getTag() == TAG_ROCKET
+			&& shapeA->getTag() == TAG_ENEMY_SHIP))
 	{	// rocket collide with enemy
-		this->removeChild(shapeA);
-		SpriteFactory::instance()->returnAgent((SpriteBase*)shapeA);
-		this->removeChild(shapeB);
-		SpriteFactory::instance()->returnAgent((SpriteBase*)shapeB);
-
-		increaseScore();
-
-		m_killCntInNormal++;
-		m_progBarSprite->setContentSize(Size(168.07f * m_killCntInNormal / 10, 24.f));
-		if (m_killCntInNormal == 10)
-		{	//	enter to special mode
-			convertState(true);
+		Rocket* pRocket = (Rocket*)(shapeA->getTag() == TAG_ROCKET ? shapeA : shapeB);
+		EnemyShip* pEnemyShip = (EnemyShip*)(shapeA->getTag() == TAG_ENEMY_SHIP ? shapeA : shapeB);
+		pEnemyShip->getHit(pRocket);
+		if (pEnemyShip->isDead())
+		{
+			this->removeChild(shapeA);
+			SpriteFactory::instance()->push((SpriteBase*)shapeA);
+			this->removeChild(shapeB);
+			SpriteFactory::instance()->push((SpriteBase*)shapeB);
+			increaseScore();
+			m_killCntInNormal++;
+			m_progBarSprite->setContentSize(Size(168.07f * m_killCntInNormal / 10, 24.f));
 		}
+
 	}
-	else if (shapeA->getTag() == AGENT_SELF_TAG
-		|| shapeB->getTag() == AGENT_SELF_TAG)
+	else if (shapeA->getTag() == TAG_SPACESHIP
+		|| shapeB->getTag() == TAG_SPACESHIP)
 	{	// crashed
 		this->stopAllActions();
 		auto scene = GameOverScene::createScene();
 		Director::getInstance()->replaceScene(TransitionFlipX::create(0.1f, scene));
 		return false;
 	}
-
 	return true;
 }
 
@@ -213,36 +211,17 @@ void GameScene::menuCloseCallback(Ref* pSender)
     Director::getInstance()->end();
 }
 
-void GameScene::menuSpecialCallback(Ref* pSender)
-{
-	cocos2d::Vector<Node*> children = this->getChildren();
-	for each (Node* child in children)
-	{
-		if (child->getTag() != AGENT_ENEMY_TAG 
-						&& child->getTag() != AGENT_ROCKET_TAG)
-		{
-			continue;
-		}
-
-		this->removeChild(child);
-		SpriteFactory::instance()->returnAgent((SpriteBase*)child);
-		increaseScore();
-	}
-
-	((MenuItemImage*)pSender)->setEnabled(false);
-}
-
 /**
 * generate rockets frequently.
 */
 void GameScene::generateRockets(float dt)
 {
-	auto rocketSprite = SpriteFactory::instance()->getAgent(AGENT_ROCKET_TAG);
+	auto rocketSprite = SpriteFactory::instance()->create(TAG_ROCKET);
 	if (rocketSprite == nullptr) {
 		printf("rocket creation failed.");
 	}
 	else {
-		auto selfNode = getChildByTag(AGENT_SELF_TAG);
+		auto selfNode = getChildByTag(TAG_SPACESHIP);
 		if (selfNode != nullptr)
 		{
 			rocketSprite->setPositionX(selfNode->getPositionX()); 
@@ -284,12 +263,6 @@ void GameScene::showCrashState()
 
 }
 
-void GameScene::convertState(bool bSpecialMode)
-{
-	m_killCntInNormal = 0;
-	m_progBarSprite->setContentSize(Size(0.f, 24.f));
-}
-
 /**
 * generate enemies frequently.
 */
@@ -298,9 +271,9 @@ void GameScene::generateEnemies(float dt)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-#define	SHIP_OCCU_WIDTH		SHIP_WIDTH * 3.f / 2.f
-#define	SHIP_OCCU_HEIGHT	SHIP_HEIGHT * 3.f / 2.f
-#define MARGIN_X			SHIP_WIDTH / 2.f
+#define	SHIP_OCCU_WIDTH		SPACE_SHIP_WIDTH * 3.f / 2.f
+#define	SHIP_OCCU_HEIGHT	SPACE_SHIP_HEIGHT * 3.f / 2.f
+#define MARGIN_X			SPACE_SHIP_WIDTH / 2.f
 
 	float occu_width = SHIP_OCCU_WIDTH;
 	float delta_val = visibleSize.width - MARGIN_X * 2.f;
@@ -313,7 +286,7 @@ void GameScene::generateEnemies(float dt)
 	{
 		for (int i = 0; i < col_cnt; i++)
 		{
-			auto enemySprite = SpriteFactory::instance()->getAgent(AGENT_ENEMY_TAG);
+			auto enemySprite = SpriteFactory::instance()->create(ENEMY_SHIP_HEAVY);
 			if (enemySprite == nullptr) {
 				printf("enemy ship creation failed.");
 			}
@@ -356,25 +329,25 @@ void GameScene::update(float dt)
 	for each (Node* child in children)
 	{
 		// no update for other agents.
-		if (child->getTag() != AGENT_SELF_TAG 
-					&& child->getTag() != AGENT_ENEMY_TAG 
-					&& child->getTag() != AGENT_ROCKET_TAG)
+		if (child->getTag() != TAG_SPACESHIP
+					&& child->getTag() != TAG_ENEMY_SHIP 
+					&& child->getTag() != TAG_ROCKET)
 		{
 			continue;
 		}
 
 		SpriteBase* agent = (SpriteBase*)child;
-		if (agent->getTag() == AGENT_ROCKET_TAG)
+		if (agent->getTag() == TAG_ROCKET)
 		{	// rocket move upwards
 			agent->setPositionY(agent->getPositionY() + ROCKET_DELTA_Y);
 			// If rocket has gone out of screen, remove from parent
 			if (agent->getPositionY() > origin.y + visibleSize.height + 40.f) 
 			{
 				this->removeChild(agent);
-				SpriteFactory::instance()->returnAgent(agent);
+				SpriteFactory::instance()->push(agent);
 			}
 		}
-		else if (agent->getTag() == AGENT_SELF_TAG)
+		else if (agent->getTag() == TAG_SPACESHIP)
 		{	// for self ship, if current is no touch state, continue
 			if (!m_isTouchBegan)
 			{
@@ -390,14 +363,14 @@ void GameScene::update(float dt)
 				agent->setPositionX(curx - SHIP_DELTA_X);
 			}
 		}
-		else if (agent->getTag() == AGENT_ENEMY_TAG)
+		else if (agent->getTag() == TAG_ENEMY_SHIP)
 		{	// enemies are coming down.
 			agent->setPositionY(agent->getPositionY() - SHIP_DELTA_Y);
 			// If enemy ship has gone out of screen, remove from parent
 			if (agent->getPositionY() < origin.y - 40.f)
 			{
 				this->removeChild(agent);
-				SpriteFactory::instance()->returnAgent(agent);
+				SpriteFactory::instance()->push(agent);
 			}
 			else 
 			{
