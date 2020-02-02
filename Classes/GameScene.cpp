@@ -329,4 +329,3 @@ void GameScene::update(float dt)
 		generateEnemies();
 	}
 }
-
