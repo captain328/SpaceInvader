@@ -1,17 +1,17 @@
-#include "AgentPool.h"
-#include "Agent.h"
+#include "SpriteFactory.h"
+#include "SpriteBase.h"
 
-AgentPool* AgentPool::_pInstance = nullptr;
+SpriteFactory* SpriteFactory::_pInstance = nullptr;
 
 /**
 * Static method for accessing class instance.
 *
 * @return AgentPool instance.
 */
-AgentPool* AgentPool::getInstance()
+SpriteFactory* SpriteFactory::instance()
 {
 	if (_pInstance == nullptr) {
-		_pInstance = new AgentPool;
+		_pInstance = new SpriteFactory;
 	}
 	return _pInstance;
 }
@@ -24,23 +24,23 @@ AgentPool* AgentPool::getInstance()
 *
 * @return agent instance.
 */
-AgentSprite* AgentPool::getAgent(int atag)
+SpriteBase* SpriteFactory::getAgent(int atag)
 {
 	if ((atag == AGENT_ROCKET_TAG && _rocketVec .empty()) 
 			|| (atag == AGENT_ENEMY_TAG && _enemyVec.empty())
 			|| atag == AGENT_SELF_TAG)
 	{
-		return AgentSprite::createSprite(atag);
+		return SpriteBase::createSprite(atag);
 	}
 	else if (atag == AGENT_ROCKET_TAG) 
 	{
-		AgentSprite* resource = _rocketVec.front();
+		SpriteBase* resource = _rocketVec.front();
 		_rocketVec.pop_front();
 		return resource;
 	}
 	else if (atag == AGENT_ENEMY_TAG)
 	{
-		AgentSprite* resource = _enemyVec.front();
+		SpriteBase* resource = _enemyVec.front();
 		_enemyVec.pop_front();
 		return resource;
 	}
@@ -56,7 +56,7 @@ AgentSprite* AgentPool::getAgent(int atag)
 * @param object object instance.
 * @return void
 */
-void AgentPool::returnAgent(AgentSprite* object)
+void SpriteFactory::returnAgent(SpriteBase* object)
 {
 	object->reset();
 	if (object->getTag() == AGENT_ROCKET_TAG) 

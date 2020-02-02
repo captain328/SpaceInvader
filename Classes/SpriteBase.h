@@ -5,10 +5,10 @@
 #include "cocos2d.h"
 #include "Config.h"
 
-class AgentSprite : public cocos2d::Sprite
+class SpriteBase : public cocos2d::Sprite
 {
 public:
-    static AgentSprite* createSprite(int);
+    static SpriteBase* createSprite(int);
 
     virtual bool init();
 	void reset();

@@ -1,8 +1,8 @@
 
 #include "GameScene.h"
 #include "GameOverScene.h"
-#include "Agent.h"
-#include "AgentPool.h"
+#include "SpriteBase.h"
+#include "SpriteFactory.h"
 #include "Config.h"
 
 USING_NS_CC;
@@ -68,20 +68,20 @@ bool GameScene::init()
 		this->addChild(dispLabel, 10);
 	}
 
-	_scoreLabel = Label::createWithTTF("0", "fonts/arial.ttf", 24);
-	if (_scoreLabel == nullptr)
+	m_scoreLabel = Label::createWithTTF("0", "fonts/arial.ttf", 24);
+	if (m_scoreLabel == nullptr)
 	{
 		printf("'fonts/arial.ttf' is missing.");
 	}
 	else
 	{
 		// position the label on the center of the screen
-		_scoreLabel->setPosition(Vec2(
+		m_scoreLabel->setPosition(Vec2(
 							dispLabel->getPositionX() + dispLabel->getContentSize().width + 5.f, 
 							dispLabel->getPositionY()));
 
 		// add the label as a child to this layer
-		this->addChild(_scoreLabel, 10);
+		this->addChild(m_scoreLabel, 10);
 	}
 
 	// show progress bar
@@ -91,11 +91,11 @@ bool GameScene::init()
 	frame->setPosition(Point(dispLabel->getPositionX() - 35.f, dispLabel->getPositionY() - 20.f));
 	this->addChild(frame, 10);
 
-	_progBarSprite = Sprite::create("prog_bar.png");
-	_progBarSprite->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
-	_progBarSprite->setContentSize(Size(0.f, 24.f));
-	_progBarSprite->setPosition(Point(frame->getPositionX() + 4.f, frame->getPositionY() - 3.f));
-	this->addChild(_progBarSprite, 10);
+	m_progBarSprite = Sprite::create("prog_bar.png");
+	m_progBarSprite->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
+	m_progBarSprite->setContentSize(Size(0.f, 24.f));
+	m_progBarSprite->setPosition(Point(frame->getPositionX() + 4.f, frame->getPositionY() - 3.f));
+	this->addChild(m_progBarSprite, 10);
 
     // add background
     auto sprite = Sprite::create("background.png");
@@ -113,7 +113,7 @@ bool GameScene::init()
     }
 
 	// add space ship
-	auto selfSprite = AgentPool::getInstance()->getAgent(AGENT_SELF_TAG);
+	auto selfSprite = SpriteFactory::instance()->getAgent(AGENT_SELF_TAG);
 	if (selfSprite == nullptr) {
 		printf("self ship creation failed.");
 	}
@@ -122,12 +122,11 @@ bool GameScene::init()
 		this->addChild(selfSprite, 1);
 	}
 	
-	_isTouchBegan = false;
-	_isSpecialMode = false;
-	_killCntInNormal = 0;
-	_level = 0;
-	_elapsed = 0.f;
-	_rocketElapsed = 0.f;
+	m_isTouchBegan = false;
+	m_killCntInNormal = 0;
+	m_level = 0;
+	m_elapsed = 0.f;
+	m_rocketElapsed = 0.f;
 
 	// add event handlers
 	auto listener = EventListenerTouchOneByOne::create();
@@ -154,20 +153,20 @@ bool GameScene::init()
 
 bool GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-	_isTouchBegan = true;
-	_touchXPos = touch->getLocation().x;
+	m_isTouchBegan = true;
+	m_touchXPos = touch->getLocation().x;
 	return true;
 }
 
 bool GameScene::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-	_touchXPos = touch->getLocation().x;
+	m_touchXPos = touch->getLocation().x;
 	return true;
 }
 
 bool GameScene::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-	_isTouchBegan = false;
+	m_isTouchBegan = false;
 	return true;
 }
 
@@ -183,20 +182,17 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 			&& shapeA->getTag() == AGENT_ENEMY_TAG))
 	{	// rocket collide with enemy
 		this->removeChild(shapeA);
-		AgentPool::getInstance()->returnAgent((AgentSprite*)shapeA);
+		SpriteFactory::instance()->returnAgent((SpriteBase*)shapeA);
 		this->removeChild(shapeB);
-		AgentPool::getInstance()->returnAgent((AgentSprite*)shapeB);
+		SpriteFactory::instance()->returnAgent((SpriteBase*)shapeB);
 
 		increaseScore();
 
-		if (!_isSpecialMode)
-		{
-			_killCntInNormal++;
-			_progBarSprite->setContentSize(Size(168.07f * _killCntInNormal / 10, 24.f));
-			if (_killCntInNormal == 10)
-			{	//	enter to special mode
-				convertState(true);
-			}
+		m_killCntInNormal++;
+		m_progBarSprite->setContentSize(Size(168.07f * m_killCntInNormal / 10, 24.f));
+		if (m_killCntInNormal == 10)
+		{	//	enter to special mode
+			convertState(true);
 		}
 	}
 	else if (shapeA->getTag() == AGENT_SELF_TAG
@@ -229,7 +225,7 @@ void GameScene::menuSpecialCallback(Ref* pSender)
 		}
 
 		this->removeChild(child);
-		AgentPool::getInstance()->returnAgent((AgentSprite*)child);
+		SpriteFactory::instance()->returnAgent((SpriteBase*)child);
 		increaseScore();
 	}
 
@@ -241,7 +237,7 @@ void GameScene::menuSpecialCallback(Ref* pSender)
 */
 void GameScene::generateRockets(float dt)
 {
-	auto rocketSprite = AgentPool::getInstance()->getAgent(AGENT_ROCKET_TAG);
+	auto rocketSprite = SpriteFactory::instance()->getAgent(AGENT_ROCKET_TAG);
 	if (rocketSprite == nullptr) {
 		printf("rocket creation failed.");
 	}
@@ -258,9 +254,9 @@ void GameScene::generateRockets(float dt)
 
 void GameScene::increaseScore()
 {
-	int curscore = std::atoi(_scoreLabel->getString().c_str());
+	int curscore = std::atoi(m_scoreLabel->getString().c_str());
 	curscore += 20;
-	_scoreLabel->setString(StringUtils::format("%d", curscore));
+	m_scoreLabel->setString(StringUtils::format("%d", curscore));
 }
 
 void GameScene::showCrashState()
@@ -290,19 +286,8 @@ void GameScene::showCrashState()
 
 void GameScene::convertState(bool bSpecialMode)
 {
-	_killCntInNormal = 0;
-	_isSpecialMode = bSpecialMode;
-
-	if (!_isSpecialMode)
-	{
-		_progBarSprite->setContentSize(Size(0.f, 24.f));
-	}
-	else
-	{	// convert to normal mode after delay time.
-		auto delayAction = DelayTime::create(SPECIAL_DELAY);
-		auto convertAction = CallFunc::create(CC_CALLBACK_0(GameScene::convertState, this, false));
-		this->runAction(Sequence::createWithTwoActions(delayAction, convertAction));
-	}
+	m_killCntInNormal = 0;
+	m_progBarSprite->setContentSize(Size(0.f, 24.f));
 }
 
 /**
@@ -319,16 +304,16 @@ void GameScene::generateEnemies(float dt)
 
 	float occu_width = SHIP_OCCU_WIDTH;
 	float delta_val = visibleSize.width - MARGIN_X * 2.f;
-	int col_cnt = delta_val / occu_width + 1;
-	int row_cnt = std::min(++_level + 1, 5);
-	_level = row_cnt - 1;
+	int col_cnt = (int)(delta_val / occu_width + 1);
+	int row_cnt = std::min(++m_level + 1, 5);
+	m_level = row_cnt - 1;
 
 	// arrange items in rows (2, 3, 4 and 5 rows of enemies, 5 is max)
 	for (int j = 0; j < row_cnt; j++)
 	{
 		for (int i = 0; i < col_cnt; i++)
 		{
-			auto enemySprite = AgentPool::getInstance()->getAgent(AGENT_ENEMY_TAG);
+			auto enemySprite = SpriteFactory::instance()->getAgent(AGENT_ENEMY_TAG);
 			if (enemySprite == nullptr) {
 				printf("enemy ship creation failed.");
 			}
@@ -347,11 +332,10 @@ void GameScene::generateEnemies(float dt)
 */
 void GameScene::update(float dt)
 {
-	_rocketElapsed += dt;
-	if ((_isSpecialMode && _rocketElapsed >= SPECIAL_SPEED)
-		|| (!_isSpecialMode && _rocketElapsed >= NORMAL_SPEED))
+	m_rocketElapsed += dt;
+	if (m_rocketElapsed >= NORMAL_SPEED)
 	{
-		_rocketElapsed = 0.f;
+		m_rocketElapsed = 0.f;
 		generateRockets();
 	}
 
@@ -379,7 +363,7 @@ void GameScene::update(float dt)
 			continue;
 		}
 
-		AgentSprite* agent = (AgentSprite*)child;
+		SpriteBase* agent = (SpriteBase*)child;
 		if (agent->getTag() == AGENT_ROCKET_TAG)
 		{	// rocket move upwards
 			agent->setPositionY(agent->getPositionY() + ROCKET_DELTA_Y);
@@ -387,21 +371,21 @@ void GameScene::update(float dt)
 			if (agent->getPositionY() > origin.y + visibleSize.height + 40.f) 
 			{
 				this->removeChild(agent);
-				AgentPool::getInstance()->returnAgent(agent);
+				SpriteFactory::instance()->returnAgent(agent);
 			}
 		}
 		else if (agent->getTag() == AGENT_SELF_TAG)
 		{	// for self ship, if current is no touch state, continue
-			if (!_isTouchBegan)
+			if (!m_isTouchBegan)
 			{
 				continue;
 			}
 			float curx = agent->getPositionX();
-			if (curx + SHIP_DELTA_X <= _touchXPos)
+			if (curx + SHIP_DELTA_X <= m_touchXPos)
 			{
 				agent->setPositionX(curx + SHIP_DELTA_X);
 			}
-			else if (curx - SHIP_DELTA_X >= _touchXPos)
+			else if (curx - SHIP_DELTA_X >= m_touchXPos)
 			{
 				agent->setPositionX(curx - SHIP_DELTA_X);
 			}
@@ -413,7 +397,7 @@ void GameScene::update(float dt)
 			if (agent->getPositionY() < origin.y - 40.f)
 			{
 				this->removeChild(agent);
-				AgentPool::getInstance()->returnAgent(agent);
+				SpriteFactory::instance()->returnAgent(agent);
 			}
 			else 
 			{

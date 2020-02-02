@@ -30,23 +30,22 @@ private:
 	void convertState(bool bSpecialMode);
 	void generateEnemies(float dt = 0.f);
 	void generateRockets(float dt = 0.f);
-	void SetPhysicsWorld(cocos2d::PhysicsWorld *world) { _sceneWorld = world; };
+	void SetPhysicsWorld(cocos2d::PhysicsWorld *world) { m_sceneWorld = world; };
 	void increaseScore();
 	void showCrashState();
 
 private:
-	cocos2d::Label*				_scoreLabel;		// score label
-	cocos2d::Sprite*			_progBarSprite;		// progress bar to show kill count in normal
+	cocos2d::Label*				m_scoreLabel;		// score label
+	cocos2d::Sprite*			m_progBarSprite;		// progress bar to show kill count in normal
 
-	float						_elapsed;			// time has elapsed
-	float						_rocketElapsed;		// time after last rocket
-	bool						_isTouchBegan;		// indicate if touch has begined
-	float						_touchXPos;			// touched x position
+	float						m_elapsed;			// time has elapsed
+	float						m_rocketElapsed;		// time after last rocket
+	bool						m_isTouchBegan;		// indicate if touch has begined
+	float						m_touchXPos;			// touched x position
 
-	bool						_isSpecialMode;		// indicate if special mode
-	int							_killCntInNormal;	// kill enemy count in normal mode.
-	int							_level;
-	cocos2d::PhysicsWorld *		_sceneWorld;
+	int							m_killCntInNormal;	// kill enemy count in normal mode.
+	int							m_level;
+	cocos2d::PhysicsWorld *		m_sceneWorld;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -1,11 +1,11 @@
 
-#include "Agent.h"
+#include "SpriteBase.h"
 
 USING_NS_CC;
 
-AgentSprite* AgentSprite::createSprite(int atag)
+SpriteBase* SpriteBase::createSprite(int atag)
 {
-	AgentSprite* sprite = new AgentSprite;
+	SpriteBase* sprite = new SpriteBase;
 	if (sprite != nullptr) 
 	{
 		sprite->setTag(atag);
@@ -16,7 +16,7 @@ AgentSprite* AgentSprite::createSprite(int atag)
 }
 
 // on "init" you need to initialize your instance
-bool AgentSprite::init()
+bool SpriteBase::init()
 {
 	// Set resource file name according to its type
 	std::string rsrcFileName;
@@ -62,7 +62,7 @@ bool AgentSprite::init()
     return true;
 }
 
-void AgentSprite::reset()
+void SpriteBase::reset()
 {
 	//RESET!
 }

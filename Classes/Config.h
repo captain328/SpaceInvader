@@ -11,6 +11,12 @@
 #define AGENT_ENEMY_TAG		65441
 #define AGENT_ROCKET_TAG	65442
 
+typedef enum _SPRITE_TYPE {
+	ALIEN,
+	ENEMY,
+	ROCKET
+} SPRITE_TYPE;
+
 // Motion displacement
 #define SHIP_DELTA_X			20.f
 #define SHIP_DELTA_Y			.5f
@@ -18,5 +24,3 @@
 
 // shoot speed
 #define NORMAL_SPEED			.5f
-#define SPECIAL_SPEED			.2f
-#define SPECIAL_DELAY			5.f
