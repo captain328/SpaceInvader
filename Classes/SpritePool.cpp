@@ -1,4 +1,4 @@
-#include "SpriteFactory.h"
+#include "SpritePool.h"
 #include "SpriteBase.h"
 #include "Config.h"
 #include "SpaceShip.h"

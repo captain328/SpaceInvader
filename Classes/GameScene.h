@@ -23,7 +23,9 @@ public:
 	bool onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event);
 	bool onContactBegin(cocos2d::PhysicsContact &contact);
 
-    // a selector callback
+	void increaseScore();
+
+	// a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
 
     // implement the "static create()" method manually
@@ -32,8 +34,6 @@ public:
 private:
 	void generateEnemies(float dt = 0.f);
 	void SetPhysicsWorld(cocos2d::PhysicsWorld *world) { m_sceneWorld = world; };
-	void increaseScore();
-	bool handleContact(SpriteBase* p1, SpriteBase* p2);
 
 private:
 	cocos2d::Label*				m_scoreLabel;		// score label

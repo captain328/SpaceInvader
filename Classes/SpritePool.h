@@ -1,6 +1,6 @@
 
-#ifndef __SPRITE_FACTORY_H_
-#define __SPRITE_FACTORY_H_
+#ifndef __SPRITE_POOL_H_
+#define __SPRITE_POOL_H_
 
 #include "Config.h"
 #include <list>

@@ -110,4 +110,3 @@ void GameOverScene::menuRetryCallback(Ref* pSender)
 {
 	MenuManager::instance()->switchScene(SCENE_GAME_PLAY);
 }
-

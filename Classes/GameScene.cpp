@@ -10,6 +10,7 @@
 #include "LightEnemyShip.h"
 #include "Enemy.h"
 #include "MenuManager.h"
+#include "CollisionManager.h"
 
 USING_NS_CC;
 
@@ -34,6 +35,8 @@ bool GameScene::init()
     {
         return false;
     }
+
+	CollisionManager::instance()->setGameScene(this);
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -171,51 +174,7 @@ bool GameScene::onContactBegin(PhysicsContact &contact)
 	SpriteBase* pSpriteA = (SpriteBase*)shapeA;
 	SpriteBase* pSpriteB = (SpriteBase*)shapeB;
 
-	return handleContact(pSpriteA, pSpriteB);
-}
-
-bool GameScene::handleContact(SpriteBase* p1, SpriteBase* p2)
-{
-	// in case of collision between rocket and ship
-	if ((p1->getTag() == TAG_ROCKET
-		&& p2->getTag() == TAG_ENEMY_SHIP)
-		|| (p2->getTag() == TAG_ROCKET
-			&& p1->getTag() == TAG_ENEMY_SHIP))
-	{
-		// rocket collide with enemy
-		Rocket* pRocket = (Rocket*)(p1->getTag() == TAG_ROCKET ? p1 : p2);
-		Enemy* pEnemyShip = (Enemy*)(p1->getTag() == TAG_ENEMY_SHIP ? p1 : p2);
-		Enemy* pEnemy = nullptr;
-		if (pEnemyShip->enemyType() == ENEMY_SHIP_HEAVY)
-		{
-			pEnemy = (HeavyEnemyShip*)pEnemyShip;
-		}
-		else {
-			pEnemy = (LightEnemyShip*)pEnemyShip;
-		}
-		// force healthpoint reduction
-		pEnemy->getHit(pRocket);
-		if (pEnemy->isDead())
-		{
-			this->removeChild((SpriteBase*)pEnemyShip);
-			// it is dead and it has to be pushed into pool
-			SpritePool::instance()->push((SpriteBase*)pEnemyShip);
-			increaseScore();
-		}
-		this->removeChild(pRocket);
-		// rocket must go to pool once it is collided with someone
-		SpritePool::instance()->push(pRocket);
-	}
-	else if (p1->getTag() == TAG_SPACESHIP
-		|| p2->getTag() == TAG_SPACESHIP)
-	{	// collision between spaceship and enemyship
-		// here is game over case
-		// collision between spaceship and enemyship
-		this->stopAllActions();
-		MenuManager::instance()->switchScene(SCENE_GAME_OVER);
-		return false;
-	}
-	return true;
+	return CollisionManager::instance()->handleContact(pSpriteA, pSpriteB);
 }
 
 void GameScene::menuCloseCallback(Ref* pSender)
