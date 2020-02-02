@@ -1,4 +1,4 @@
-
+#include <stdlib.h>
 #include "GameScene.h"
 #include "GameOverScene.h"
 #include "SpriteBase.h"
@@ -118,7 +118,7 @@ bool GameScene::init()
 	// add space ship
 	SpaceShip* spaceShip = (SpaceShip*)SpriteFactory::instance()->create(TAG_SPACESHIP);
 	if (spaceShip == nullptr) {
-		printf("self ship creation failed.");
+		printf("space ship creation failed.");
 	}
 	else {
 		spaceShip->setPosition(Vec2(visibleSize.width / 2 + origin.x, SPACE_SHIP_HEIGHT * 3 + origin.y));
@@ -286,7 +286,9 @@ void GameScene::generateEnemies(float dt)
 	{
 		for (int i = 0; i < col_cnt; i++)
 		{
-			auto enemySprite = SpriteFactory::instance()->create(ENEMY_SHIP_HEAVY);
+			int nEnemyType = rand() % 2;
+			// make random enemy ship
+			auto enemySprite = SpriteFactory::instance()->create(nEnemyType);
 			if (enemySprite == nullptr) {
 				printf("enemy ship creation failed.");
 			}
@@ -320,7 +322,7 @@ void GameScene::update(float dt)
 	cocos2d::Vector<Node*> children = this->getChildren();
 	for each (Node* child in children)
 	{
-		// no update for other agents.
+		// no update for other sprites.
 		if (child->getTag() != TAG_SPACESHIP
 					&& child->getTag() != TAG_ENEMY_SHIP 
 					&& child->getTag() != TAG_ROCKET)
