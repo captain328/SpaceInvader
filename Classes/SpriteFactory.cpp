@@ -9,38 +9,32 @@ SpriteFactory* SpriteFactory::_instance = NULL;
 
 SpriteBase* SpriteFactory::create(int kind)
 {
-	if (_pool.empty()) {
-		switch (kind)
-		{
-			case TAG_SPACESHIP:
-			{
-				return new SpaceShip(SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT, SPACE_SHIP_PATH);
-			}
-			case TAG_ROCKET:
-			{
-				return new Rocket(DEFAULT_ROCKET_POWER, ROCKET_WIDTH, ROCKET_HEIGHT, ROCKET_PATH);
-			}
-			case ENEMY_SHIP_HEAVY:
-			{
-				return new EnemyShip(HEAVY_ENEMY_HEALTH, HEAVY_ENEMY_WIDTH, HEAVY_ENEMY_HEIGHT, HEAVY_ENEMY_PATH);
-			}
-			case ENEMY_SHIP_LIGHT:
-			{
-				return new EnemyShip(LIGHT_ENEMY_HEALTH, LIGHT_ENEMY_WIDTH, LIGHT_ENEMY_HEIGHT, LIGHT_ENEMY_PATH);
-			}
-			default:
-				return nullptr;
-		}
-	}
-
-	// return first object as a default
-	if (kind == -1)
+	SpriteBase* pFound = findFirstSpriteWithKind(kind);
+	if (pFound != nullptr)
 	{
-		SpriteBase* pFront = _pool.front();
-		_pool.pop_back();
-		return pFront;
+		return pFound;
 	}
-	return findFirstSpriteWithKind(kind);
+	switch (kind)
+	{
+		case TAG_SPACESHIP:
+		{
+			return new SpaceShip(SPACE_SHIP_WIDTH, SPACE_SHIP_HEIGHT, SPACE_SHIP_PATH);
+		}
+		case TAG_ROCKET:
+		{
+			return new Rocket(DEFAULT_ROCKET_POWER, ROCKET_WIDTH, ROCKET_HEIGHT, ROCKET_PATH);
+		}
+		case ENEMY_SHIP_HEAVY:
+		{
+			return new EnemyShip(HEAVY_ENEMY_HEALTH, HEAVY_ENEMY_WIDTH, HEAVY_ENEMY_HEIGHT, HEAVY_ENEMY_PATH);
+		}
+		case ENEMY_SHIP_LIGHT:
+		{
+			return new EnemyShip(LIGHT_ENEMY_HEALTH, LIGHT_ENEMY_WIDTH, LIGHT_ENEMY_HEIGHT, LIGHT_ENEMY_PATH);
+		}
+		default:
+			return nullptr;
+	}	
 }
 
 SpriteBase* SpriteFactory::findFirstSpriteWithKind(int kind)

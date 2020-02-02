@@ -51,7 +51,7 @@
 
 // Motion displacement
 #define SHIP_DELTA_X			20.f
-#define SHIP_DELTA_Y			.5f
+#define SHIP_DELTA_Y			1.5f
 #define ROCKET_DELTA_Y			14.f
 
 

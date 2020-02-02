@@ -312,14 +312,6 @@ void GameScene::update(float dt)
 		generateRockets();
 	}
 
-	/*_elapsed += dt;
-	if (_elapsed < 0.1f)
-	{
-		return;
-	}
-
-	_elapsed = 0.f;*/
-
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
