@@ -55,6 +55,7 @@ SpriteBase* SpriteFactory::findFirstSpriteWithKind(int kind)
 
 void SpriteFactory::push(SpriteBase* p)
 {
+	p->reset();
 	_pool.push_back(p);
 }
 

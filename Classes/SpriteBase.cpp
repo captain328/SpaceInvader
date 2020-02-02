@@ -27,3 +27,8 @@ void SpriteBase::SetSpriteKind(int kind)
 	m_nSpriteKind = kind;
 	setTag(kind);
 }
+
+void SpriteBase::reset()
+{
+	// override if necessary
+}

@@ -14,6 +14,7 @@ public:
 	bool isValid() { return m_bValid; }
 	int spriteKind() { return m_nSpriteKind; }
 	void SetSpriteKind(int kind);
+	virtual void reset();
 };
 
 #endif // __AGENT_SPRITE_H__
