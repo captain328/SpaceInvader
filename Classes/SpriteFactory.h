@@ -7,23 +7,24 @@
 
 class SpriteBase;
 
-class SpriteFactory
+class SpritePool
 {
 private:
-	SpriteFactory() {}
-	static SpriteFactory* _instance;
+	SpritePool() {}
+	static SpritePool* _instance;
 
 public:
 	virtual SpriteBase* create(int kind = -1);
 	void push(SpriteBase*);
 
 public:
-	static SpriteFactory* instance();
+	static SpritePool* instance();
 
 private:
 	SpriteBase* findFirstSpriteWithTag(int tag);
 
 protected:
+	// list for storing objects
 	std::list<SpriteBase*> _pool;
 };
 

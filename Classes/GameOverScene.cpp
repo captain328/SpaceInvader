@@ -1,7 +1,8 @@
 
 #include "GameOverScene.h"
 #include "GameScene.h"
-
+#include "MenuManager.h"
+#include "config.h"
 USING_NS_CC;
 
 Scene* GameOverScene::createScene()
@@ -102,13 +103,11 @@ bool GameOverScene::init()
 
 void GameOverScene::menuExitCallback(Ref* pSender)
 {
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
+	MenuManager::instance()->quit();
 }
 
 void GameOverScene::menuRetryCallback(Ref* pSender)
 {
-	auto scene = GameScene::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(1.f, scene));
+	MenuManager::instance()->switchScene(SCENE_GAME_PLAY);
 }
 

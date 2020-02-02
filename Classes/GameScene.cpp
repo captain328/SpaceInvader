@@ -9,6 +9,7 @@
 #include "HeavyEnemyShip.h"
 #include "LightEnemyShip.h"
 #include "Enemy.h"
+#include "MenuManager.h"
 
 USING_NS_CC;
 
@@ -104,7 +105,7 @@ bool GameScene::init()
     }
 
 	// add space ship
-	SpaceShip* spaceShip = (SpaceShip*)SpriteFactory::instance()->create(TAG_SPACESHIP);
+	SpaceShip* spaceShip = (SpaceShip*)SpritePool::instance()->create(TAG_SPACESHIP);
 	if (spaceShip == nullptr) {
 		printf("space ship creation failed.");
 	}
@@ -197,18 +198,21 @@ bool GameScene::handleContact(SpriteBase* p1, SpriteBase* p2)
 		if (pEnemy->isDead())
 		{
 			this->removeChild((SpriteBase*)pEnemyShip);
-			SpriteFactory::instance()->push((SpriteBase*)pEnemyShip);
+			// it is dead and it has to be pushed into pool
+			SpritePool::instance()->push((SpriteBase*)pEnemyShip);
 			increaseScore();
 		}
 		this->removeChild(pRocket);
-		SpriteFactory::instance()->push(pRocket);
+		// rocket must go to pool once it is collided with someone
+		SpritePool::instance()->push(pRocket);
 	}
 	else if (p1->getTag() == TAG_SPACESHIP
 		|| p2->getTag() == TAG_SPACESHIP)
 	{	// collision between spaceship and enemyship
+		// here is game over case
+		// collision between spaceship and enemyship
 		this->stopAllActions();
-		auto scene = GameOverScene::createScene();
-		Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(224, 30, 30)));
+		MenuManager::instance()->switchScene(SCENE_GAME_OVER);
 		return false;
 	}
 	return true;
@@ -254,7 +258,7 @@ void GameScene::generateEnemies(float dt)
 		{
 			int nEnemyType = rand() % 2;
 			// make random enemy ship
-			SpriteBase* enemySprite = SpriteFactory::instance()->create(nEnemyType);
+			SpriteBase* enemySprite = SpritePool::instance()->create(nEnemyType);
 			if (enemySprite == nullptr) {
 				printf("enemy ship creation failed.");
 			}
@@ -309,7 +313,7 @@ void GameScene::update(float dt)
 			{
 				this->removeChild(agent);
 				// push to pool for reuse
-				SpriteFactory::instance()->push(agent);
+				SpritePool::instance()->push(agent);
 			}
 		}
 		else if (agent->getTag() == TAG_SPACESHIP)
@@ -338,7 +342,7 @@ void GameScene::update(float dt)
 			{
 				this->removeChild(agent);
 				agent->reset();
-				SpriteFactory::instance()->push(agent);
+				SpritePool::instance()->push(agent);
 			}
 			else 
 			{

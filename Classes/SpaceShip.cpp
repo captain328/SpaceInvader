@@ -11,7 +11,7 @@ SpaceShip::SpaceShip(float width, float height, std::string path)
 
 Rocket* SpaceShip::fire()
 {
-	Rocket* rocketSprite = (Rocket*)(SpriteFactory::instance()->create(TAG_ROCKET));
+	Rocket* rocketSprite = (Rocket*)(SpritePool::instance()->create(TAG_ROCKET));
 	if (rocketSprite == nullptr) {
 		printf("rocket creation failed.");
 	}

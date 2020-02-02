@@ -54,6 +54,10 @@
 #define SHIP_DELTA_Y			1.5f
 #define ROCKET_DELTA_Y			14.f
 
+// Scene ids
+#define SCENE_GAME_PLAY 0
+#define SCENE_GAME_OVER 1
+
 
 // shoot speed
 #define ROCKET_RELOAD_RATE		.2f

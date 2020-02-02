@@ -804,6 +804,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\HeavyEnemyShip.h" />
     <ClInclude Include="..\Classes\LightEnemyShip.h" />
+    <ClInclude Include="..\Classes\MenuManager.h" />
     <ClInclude Include="..\Classes\Rocket.h" />
     <ClInclude Include="..\Classes\SpaceShip.h" />
     <ClInclude Include="..\Classes\SpriteBase.h" />
@@ -817,6 +818,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\HeavyEnemyShip.cpp" />
     <ClCompile Include="..\Classes\LightEnemyShip.cpp" />
+    <ClCompile Include="..\Classes\MenuManager.cpp" />
     <ClCompile Include="..\Classes\Rocket.cpp" />
     <ClCompile Include="..\Classes\SpaceShip.cpp" />
     <ClCompile Include="..\Classes\SpriteBase.cpp" />

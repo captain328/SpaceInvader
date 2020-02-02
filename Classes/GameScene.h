@@ -6,7 +6,7 @@
 #include <map>
 
 class SpriteBase;
-class SpriteFactory;
+class SpritePool;
 class SpaceShip;
 class Enemy;
 class GameScene : public cocos2d::Scene
