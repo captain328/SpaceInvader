@@ -38,11 +38,10 @@ private:
 
 private:
 	cocos2d::Label*				m_scoreLabel;		// score label
-	cocos2d::Sprite*			m_progBarSprite;		// progress bar to show kill count in normal
 
 	float						m_elapsed;			// time has elapsed
 	float						m_rocketElapsed;		// time after last rocket
-	bool						m_isTouchBegan;		// indicate if touch has begined
+	bool						m_bTouchBegan;		// indicate if touch has begined
 	float						m_touchXPos;			// touched x position
 
 	int							m_killCntInNormal;	// kill enemy count in normal mode.

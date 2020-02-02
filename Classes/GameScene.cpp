@@ -86,20 +86,6 @@ bool GameScene::init()
 		// add the label as a child to this layer
 		this->addChild(m_scoreLabel, 10);
 	}
-
-	// show progress bar
-	auto frame = Sprite::create(PROGRESS_FRAME_PATH);
-	frame->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
-	frame->setScaleX(0.5f);
-	frame->setPosition(Point(dispLabel->getPositionX() - 35.f, dispLabel->getPositionY() - 20.f));
-	this->addChild(frame, 10);
-
-	m_progBarSprite = Sprite::create(PROGRESS_BAR_PATH);
-	m_progBarSprite->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
-	m_progBarSprite->setContentSize(Size(0.f, 24.f));
-	m_progBarSprite->setPosition(Point(frame->getPositionX() + 4.f, frame->getPositionY() - 3.f));
-	this->addChild(m_progBarSprite, 10);
-
     // add background
     auto sprite = Sprite::create(BACKGROUND_PATH);
     if (sprite == nullptr) {
@@ -125,7 +111,7 @@ bool GameScene::init()
 		this->addChild(spaceShip, 1);
 	}
 	
-	m_isTouchBegan = false;
+	m_bTouchBegan = false;
 	m_killCntInNormal = 0;
 	m_level = 0;
 	m_elapsed = 0.f;
@@ -151,7 +137,7 @@ bool GameScene::init()
 
 bool GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-	m_isTouchBegan = true;
+	m_bTouchBegan = true;
 	m_touchXPos = touch->getLocation().x;
 	return true;
 }
@@ -164,13 +150,14 @@ bool GameScene::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 
 bool GameScene::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-	m_isTouchBegan = false;
+	m_bTouchBegan = false;
 	return true;
 }
 
 // Handle collision event
 bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 {
+	// collision is made between two objects
 	Node* shapeA = contact.getShapeA()->getBody()->getNode();
 	Node* shapeB = contact.getShapeB()->getBody()->getNode();
 
@@ -178,28 +165,29 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 			&& shapeB->getTag() == TAG_ENEMY_SHIP)
 		|| (shapeB->getTag() == TAG_ROCKET
 			&& shapeA->getTag() == TAG_ENEMY_SHIP))
-	{	// rocket collide with enemy
+	{
+		// rocket collide with enemy
 		Rocket* pRocket = (Rocket*)(shapeA->getTag() == TAG_ROCKET ? shapeA : shapeB);
 		EnemyShip* pEnemyShip = (EnemyShip*)(shapeA->getTag() == TAG_ENEMY_SHIP ? shapeA : shapeB);
+		
+		// force healthpoint reduction
 		pEnemyShip->getHit(pRocket);
 		if (pEnemyShip->isDead())
 		{
-			this->removeChild(shapeA);
-			SpriteFactory::instance()->push((SpriteBase*)shapeA);
-			this->removeChild(shapeB);
-			SpriteFactory::instance()->push((SpriteBase*)shapeB);
+			this->removeChild(pEnemyShip);
+			SpriteFactory::instance()->push(pEnemyShip);
 			increaseScore();
 			m_killCntInNormal++;
-			m_progBarSprite->setContentSize(Size(168.07f * m_killCntInNormal / 10, 24.f));
 		}
-
+		this->removeChild(pRocket);
+		SpriteFactory::instance()->push(pRocket);
 	}
 	else if (shapeA->getTag() == TAG_SPACESHIP
 		|| shapeB->getTag() == TAG_SPACESHIP)
 	{	// crashed
 		this->stopAllActions();
 		auto scene = GameOverScene::createScene();
-		Director::getInstance()->replaceScene(TransitionFlipX::create(0.1f, scene));
+		Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(224, 30, 30)));
 		return false;
 	}
 	return true;
@@ -338,12 +326,13 @@ void GameScene::update(float dt)
 			if (agent->getPositionY() > origin.y + visibleSize.height + 40.f) 
 			{
 				this->removeChild(agent);
+				// push to pool for reuse
 				SpriteFactory::instance()->push(agent);
 			}
 		}
 		else if (agent->getTag() == TAG_SPACESHIP)
 		{	// for self ship, if current is no touch state, continue
-			if (!m_isTouchBegan)
+			if (!m_bTouchBegan)
 			{
 				continue;
 			}
@@ -361,7 +350,7 @@ void GameScene::update(float dt)
 		{	// enemies are coming down.
 			agent->setPositionY(agent->getPositionY() - SHIP_DELTA_Y);
 			// If enemy ship has gone out of screen, remove from parent
-			if (agent->getPositionY() < origin.y - 40.f)
+			if (agent->getPositionY() < origin.y - SPACE_SHIP_HEIGHT)
 			{
 				this->removeChild(agent);
 				SpriteFactory::instance()->push(agent);

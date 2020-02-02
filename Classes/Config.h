@@ -59,6 +59,4 @@
 #define NORMAL_SPEED			.2f
 
 // paths
-#define PROGRESS_FRAME_PATH "prog_frame.png"
-#define PROGRESS_BAR_PATH "prog_bar.png"
 #define BACKGROUND_PATH "background.png"
