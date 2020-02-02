@@ -1,6 +1,6 @@
 
-#ifndef __Agent_SPRITE_H__
-#define __Agent_SPRITE_H__
+#ifndef __SPRITE_BASE_H__
+#define __SPRITE_BASE_H__
 
 #include "cocos2d.h"
 
@@ -17,4 +17,4 @@ public:
 	virtual void reset();
 };
 
-#endif // __AGENT_SPRITE_H__
+#endif // __SPRITE_BASE_H__
