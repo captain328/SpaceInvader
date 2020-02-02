@@ -1,7 +1,7 @@
 #include "Config.h"
 #include "SpaceShip.h"
 #include "Rocket.h"
-#include "SpriteFactory.h"
+#include "SpritePool.h"
 
 SpaceShip::SpaceShip(float width, float height, std::string path)
 	: SpriteBase(width, height, path)

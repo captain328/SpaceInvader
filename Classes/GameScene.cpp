@@ -2,7 +2,7 @@
 #include "GameScene.h"
 #include "GameOverScene.h"
 #include "SpriteBase.h"
-#include "SpriteFactory.h"
+#include "SpritePool.h"
 #include "Config.h"
 #include "SpaceShip.h"
 #include "Rocket.h"

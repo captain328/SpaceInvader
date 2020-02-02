@@ -6,7 +6,7 @@
 #include "HeavyEnemyShip.h"
 #include "LightEnemyShip.h"
 #include "Rocket.h"
-#include "SpriteFactory.h"
+#include "SpritePool.h"
 #include "MenuManager.h"
 
 USING_NS_CC;
