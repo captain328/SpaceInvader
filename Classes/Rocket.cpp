@@ -4,6 +4,6 @@
 Rocket::Rocket(float power, float width, float height, std::string path)
 	: SpriteBase(width, height, path)
 {
-	SetSpriteKind(TAG_ROCKET);
+	setTag(TAG_ROCKET);
 	m_power = power;
 }

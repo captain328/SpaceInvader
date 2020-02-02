@@ -3,13 +3,13 @@
 #include "Config.h"
 USING_NS_CC;
 
+int SpriteBase::_spriteIncrement = 0;
+
 SpriteBase::SpriteBase(float w, float h, std::string path)
 {
-	m_nSpriteKind = TAG_GENERAL;
-
+	m_nSpriteId = _spriteIncrement++;
 	if (!Sprite::initWithFile(path))
 	{
-		m_bValid = false;
 		return;
 	}
 
@@ -19,13 +19,6 @@ SpriteBase::SpriteBase(float w, float h, std::string path)
 	PhysicsBody* rectBody = PhysicsBody::createBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT);
 	rectBody->setContactTestBitmask(true);
 	this->setPhysicsBody(rectBody);
-	m_bValid = true;
-}
-
-void SpriteBase::SetSpriteKind(int kind)
-{
-	m_nSpriteKind = kind;
-	setTag(kind);
 }
 
 void SpriteBase::reset()

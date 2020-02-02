@@ -1,19 +1,19 @@
-#include "EnemyShip.h"
+#include "HeavyEnemyShip.h"
 #include "Rocket.h"
 #include "Config.h"
 
-EnemyShip::EnemyShip(float health, float width, float height, std::string path)
-	: SpriteBase(width, height, path)
+HeavyEnemyShip::HeavyEnemyShip(float health, float width, float height, std::string path)
+	: Enemy(health, width, height, path)
 {
-	m_health = health;
-	SetSpriteKind(TAG_ENEMY_SHIP);
+	setTag(TAG_ENEMY_SHIP);
 	m_hurtImage = HEAVY_ENEMY_HIT_PATH;
 	m_normalImage = path;
+	m_enemyType = ENEMY_SHIP_HEAVY;
 	// EnemyShip has to be displayed as flipped
 	setFlippedY(true);
 }
 
-void EnemyShip::getHit(Rocket* pRocket)
+void HeavyEnemyShip::getHit(Rocket* pRocket)
 {
 	this->m_health -= pRocket->power();
 	cocos2d::Size sz = this->getContentSize();
@@ -23,7 +23,7 @@ void EnemyShip::getHit(Rocket* pRocket)
 	}
 }
 
-void EnemyShip::reset()
+void HeavyEnemyShip::reset()
 {
 	this->m_health = m_fullHealth;
 	cocos2d::Size sz = this->getContentSize();

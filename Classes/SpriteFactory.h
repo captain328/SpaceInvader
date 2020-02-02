@@ -21,7 +21,7 @@ public:
 	static SpriteFactory* instance();
 
 private:
-	SpriteBase* findFirstSpriteWithKind(int kind);
+	SpriteBase* findFirstSpriteWithTag(int tag);
 
 protected:
 	std::list<SpriteBase*> _pool;

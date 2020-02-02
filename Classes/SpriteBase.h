@@ -7,13 +7,12 @@
 class SpriteBase : public cocos2d::Sprite
 {
 private:
-	bool m_bValid;
-	int m_nSpriteKind;
+	static int _spriteIncrement;
+private:
+	int m_nSpriteId;
 public:
+	int spriteId() { return m_nSpriteId; }
 	SpriteBase(float w, float h, std::string path);
-	bool isValid() { return m_bValid; }
-	int spriteKind() { return m_nSpriteKind; }
-	void SetSpriteKind(int kind);
 	virtual void reset();
 };
 

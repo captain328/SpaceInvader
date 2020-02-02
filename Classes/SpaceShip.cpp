@@ -6,7 +6,7 @@
 SpaceShip::SpaceShip(float width, float height, std::string path)
 	: SpriteBase(width, height, path)
 {
-	SetSpriteKind(TAG_SPACESHIP);
+	setTag(TAG_SPACESHIP);
 }
 
 Rocket* SpaceShip::fire()

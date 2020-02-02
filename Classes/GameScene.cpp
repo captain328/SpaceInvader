@@ -6,7 +6,9 @@
 #include "Config.h"
 #include "SpaceShip.h"
 #include "Rocket.h"
-#include "EnemyShip.h"
+#include "HeavyEnemyShip.h"
+#include "LightEnemyShip.h"
+#include "Enemy.h"
 
 USING_NS_CC;
 
@@ -159,29 +161,50 @@ bool GameScene::onContactBegin(PhysicsContact &contact)
 	Node* shapeA = contact.getShapeA()->getBody()->getNode();
 	Node* shapeB = contact.getShapeB()->getBody()->getNode();
 
+	if (!((shapeA->getTag() <= TAG_SPACESHIP && shapeA->getTag() >= TAG_ENEMY_SHIP) &&
+		(shapeB->getTag() <= TAG_SPACESHIP && shapeB->getTag() >= TAG_ENEMY_SHIP)))
+	{
+		// out of our handling
+		return true;
+	}
+	SpriteBase* pSpriteA = (SpriteBase*)shapeA;
+	SpriteBase* pSpriteB = (SpriteBase*)shapeB;
+
+	return handleContact(pSpriteA, pSpriteB);
+}
+
+bool GameScene::handleContact(SpriteBase* p1, SpriteBase* p2)
+{
 	// in case of collision between rocket and ship
-	if ((shapeA->getTag() == TAG_ROCKET 
-			&& shapeB->getTag() == TAG_ENEMY_SHIP)
-		|| (shapeB->getTag() == TAG_ROCKET
-			&& shapeA->getTag() == TAG_ENEMY_SHIP))
+	if ((p1->getTag() == TAG_ROCKET
+		&& p2->getTag() == TAG_ENEMY_SHIP)
+		|| (p2->getTag() == TAG_ROCKET
+			&& p1->getTag() == TAG_ENEMY_SHIP))
 	{
 		// rocket collide with enemy
-		Rocket* pRocket = (Rocket*)(shapeA->getTag() == TAG_ROCKET ? shapeA : shapeB);
-		EnemyShip* pEnemyShip = (EnemyShip*)(shapeA->getTag() == TAG_ENEMY_SHIP ? shapeA : shapeB);
-		
-		// force healthpoint reduction
-		pEnemyShip->getHit(pRocket);
-		if (pEnemyShip->isDead())
+		Rocket* pRocket = (Rocket*)(p1->getTag() == TAG_ROCKET ? p1 : p2);
+		Enemy* pEnemyShip = (Enemy*)(p1->getTag() == TAG_ENEMY_SHIP ? p1 : p2);
+		Enemy* pEnemy = nullptr;
+		if (pEnemyShip->enemyType() == ENEMY_SHIP_HEAVY)
 		{
-			this->removeChild(pEnemyShip);
-			SpriteFactory::instance()->push(pEnemyShip);
+			pEnemy = (HeavyEnemyShip*)pEnemyShip;
+		}
+		else {
+			pEnemy = (LightEnemyShip*)pEnemyShip;
+		}
+		// force healthpoint reduction
+		pEnemy->getHit(pRocket);
+		if (pEnemy->isDead())
+		{
+			this->removeChild((SpriteBase*)pEnemyShip);
+			SpriteFactory::instance()->push((SpriteBase*)pEnemyShip);
 			increaseScore();
 		}
 		this->removeChild(pRocket);
 		SpriteFactory::instance()->push(pRocket);
 	}
-	else if (shapeA->getTag() == TAG_SPACESHIP
-		|| shapeB->getTag() == TAG_SPACESHIP)
+	else if (p1->getTag() == TAG_SPACESHIP
+		|| p2->getTag() == TAG_SPACESHIP)
 	{	// collision between spaceship and enemyship
 		this->stopAllActions();
 		auto scene = GameOverScene::createScene();
@@ -231,7 +254,7 @@ void GameScene::generateEnemies(float dt)
 		{
 			int nEnemyType = rand() % 2;
 			// make random enemy ship
-			auto enemySprite = SpriteFactory::instance()->create(nEnemyType);
+			SpriteBase* enemySprite = SpriteFactory::instance()->create(nEnemyType);
 			if (enemySprite == nullptr) {
 				printf("enemy ship creation failed.");
 			}
@@ -314,6 +337,7 @@ void GameScene::update(float dt)
 			if (agent->getPositionY() < origin.y - SPACE_SHIP_HEIGHT)
 			{
 				this->removeChild(agent);
+				agent->reset();
 				SpriteFactory::instance()->push(agent);
 			}
 			else 

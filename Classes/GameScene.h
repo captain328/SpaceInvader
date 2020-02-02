@@ -3,10 +3,12 @@
 #define __GAME_SCENE_H__
 
 #include "cocos2d.h"
+#include <map>
 
+class SpriteBase;
 class SpriteFactory;
 class SpaceShip;
-
+class Enemy;
 class GameScene : public cocos2d::Scene
 {
 public:
@@ -31,6 +33,7 @@ private:
 	void generateEnemies(float dt = 0.f);
 	void SetPhysicsWorld(cocos2d::PhysicsWorld *world) { m_sceneWorld = world; };
 	void increaseScore();
+	bool handleContact(SpriteBase* p1, SpriteBase* p2);
 
 private:
 	cocos2d::Label*				m_scoreLabel;		// score label
@@ -42,6 +45,8 @@ private:
 
 	int							m_level;
 	cocos2d::PhysicsWorld *		m_sceneWorld;
+
+	std::map<int, Enemy*> m_enemies;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

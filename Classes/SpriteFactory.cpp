@@ -2,14 +2,18 @@
 #include "SpriteBase.h"
 #include "Config.h"
 #include "SpaceShip.h"
-#include "EnemyShip.h"
+#include "HeavyEnemyShip.h"
+#include "LightEnemyShip.h"
 #include "Rocket.h"
 
 SpriteFactory* SpriteFactory::_instance = NULL;
 
+/*
+* find or create 
+*/
 SpriteBase* SpriteFactory::create(int kind)
 {
-	SpriteBase* pFound = findFirstSpriteWithKind(kind);
+	SpriteBase* pFound = findFirstSpriteWithTag(kind);
 	if (pFound != nullptr)
 	{
 		return pFound;
@@ -26,25 +30,28 @@ SpriteBase* SpriteFactory::create(int kind)
 		}
 		case ENEMY_SHIP_HEAVY:
 		{
-			return new EnemyShip(HEAVY_ENEMY_HEALTH, HEAVY_ENEMY_WIDTH, HEAVY_ENEMY_HEIGHT, HEAVY_ENEMY_PATH);
+			return new HeavyEnemyShip(HEAVY_ENEMY_HEALTH, HEAVY_ENEMY_WIDTH, HEAVY_ENEMY_HEIGHT, HEAVY_ENEMY_PATH);
 		}
 		case ENEMY_SHIP_LIGHT:
 		{
-			return new EnemyShip(LIGHT_ENEMY_HEALTH, LIGHT_ENEMY_WIDTH, LIGHT_ENEMY_HEIGHT, LIGHT_ENEMY_PATH);
+			return new LightEnemyShip(LIGHT_ENEMY_HEALTH, LIGHT_ENEMY_WIDTH, LIGHT_ENEMY_HEIGHT, LIGHT_ENEMY_PATH);
 		}
 		default:
 			return nullptr;
 	}	
 }
 
-SpriteBase* SpriteFactory::findFirstSpriteWithKind(int kind)
+/*
+* retrieve first sprite object with tag id
+*/
+SpriteBase* SpriteFactory::findFirstSpriteWithTag(int tag)
 {
 	std::list<SpriteBase*>::iterator it = _pool.begin();
 	int nSpriteCnt = _pool.size();
 	for (int i = 0; i < nSpriteCnt; i++)
 	{
 		SpriteBase* ithItem = *it;
-		if (ithItem->spriteKind() == kind) {
+		if (ithItem->getTag() == tag) {
 			_pool.remove(ithItem);
 			return ithItem;
 		}
@@ -53,6 +60,9 @@ SpriteBase* SpriteFactory::findFirstSpriteWithKind(int kind)
 	return nullptr;
 }
 
+/*
+* push object to pool for reuse
+*/
 void SpriteFactory::push(SpriteBase* p)
 {
 	p->reset();
