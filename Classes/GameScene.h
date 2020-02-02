@@ -44,7 +44,7 @@ private:
 	bool						m_bTouchBegan;		// indicate if touch has begined
 	float						m_touchXPos;			// touched x position
 
-	int							m_killCntInNormal;	// kill enemy count in normal mode.
+	int							m_killCount;	// kill enemy count in normal mode.
 	int							m_level;
 	cocos2d::PhysicsWorld *		m_sceneWorld;
 };

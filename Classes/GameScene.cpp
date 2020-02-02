@@ -112,8 +112,7 @@ bool GameScene::init()
 	}
 	
 	m_bTouchBegan = false;
-	m_killCntInNormal = 0;
-	m_level = 0;
+	m_killCount = 0;
 	m_elapsed = 0.f;
 	m_rocketElapsed = 0.f;
 
@@ -177,7 +176,7 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 			this->removeChild(pEnemyShip);
 			SpriteFactory::instance()->push(pEnemyShip);
 			increaseScore();
-			m_killCntInNormal++;
+			m_killCount++;
 		}
 		this->removeChild(pRocket);
 		SpriteFactory::instance()->push(pRocket);
