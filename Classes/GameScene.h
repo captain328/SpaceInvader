@@ -5,6 +5,7 @@
 #include "cocos2d.h"
 
 class SpriteFactory;
+class SpaceShip;
 
 class GameScene : public cocos2d::Scene
 {
@@ -22,29 +23,23 @@ public:
 
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-	void menuSpecialCallback(cocos2d::Ref* pSender);
 
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
 
 private:
-	void enableSpecialMenuItem(float dt = 0.f);
-	void convertState(bool bSpecialMode);
 	void generateEnemies(float dt = 0.f);
-	void generateRockets(float dt = 0.f);
 	void SetPhysicsWorld(cocos2d::PhysicsWorld *world) { m_sceneWorld = world; };
 	void increaseScore();
-	void showCrashState();
 
 private:
 	cocos2d::Label*				m_scoreLabel;		// score label
 
 	float						m_elapsed;			// time has elapsed
-	float						m_rocketElapsed;		// time after last rocket
+	float						m_rocketReloadTimer;		// time after last rocket
 	bool						m_bTouchBegan;		// indicate if touch has begined
 	float						m_touchXPos;			// touched x position
 
-	int							m_killCount;	// kill enemy count in normal mode.
 	int							m_level;
 	cocos2d::PhysicsWorld *		m_sceneWorld;
 };

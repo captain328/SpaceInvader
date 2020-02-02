@@ -56,7 +56,7 @@
 
 
 // shoot speed
-#define NORMAL_SPEED			.2f
+#define ROCKET_RELOAD_RATE		.2f
 
 // paths
 #define BACKGROUND_PATH "background.png"
