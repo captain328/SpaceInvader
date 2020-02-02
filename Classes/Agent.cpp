@@ -27,7 +27,7 @@ bool AgentSprite::init()
 	}
 	else if (getTag() == AGENT_ENEMY_TAG)
 	{
-		rsrcFileName = StringUtils::format("enemy.png");
+		rsrcFileName = StringUtils::format("enemy1.png");
 	}
 	else if (getTag() == AGENT_ROCKET_TAG)
 	{
