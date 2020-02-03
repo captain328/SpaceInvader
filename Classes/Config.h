@@ -60,3 +60,5 @@
 
 // paths
 #define BACKGROUND_PATH "background.png"
+
+#define HURT_NAME "hurt"

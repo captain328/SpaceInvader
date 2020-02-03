@@ -11,6 +11,11 @@ HeavyEnemyShip::HeavyEnemyShip(float health, float width, float height, std::str
 	m_enemyType = ENEMY_SHIP_HEAVY;
 	// EnemyShip has to be displayed as flipped
 	setFlippedY(true);
+	Sprite* pHurt = Sprite::createWithSpriteFrameName(m_hurtImage);
+	pHurt->setName(HURT_NAME);
+	pHurt->setAnchorPoint(cocos2d::Vec2(0, 0));
+	pHurt->setContentSize(cocos2d::Size(0, 0));
+	this->addChild(pHurt);
 }
 
 void HeavyEnemyShip::getHit(Rocket* pRocket)
@@ -18,8 +23,9 @@ void HeavyEnemyShip::getHit(Rocket* pRocket)
 	this->m_health -= pRocket->power();
 	cocos2d::Size sz = this->getContentSize();
 	if (this->m_health >= 0) {
-		this->setTexture(m_hurtImage);
-		this->setContentSize(sz);
+		auto* pHurt = this->getChildByName(HURT_NAME);
+		pHurt->setContentSize(cocos2d::Size(0, 0));
+		pHurt->setContentSize(sz);
 	}
 }
 
@@ -27,6 +33,7 @@ void HeavyEnemyShip::reset()
 {
 	this->m_health = m_fullHealth;
 	cocos2d::Size sz = this->getContentSize();
-	this->initWithSpriteFrameName(m_hurtImage);
+	auto* pHurt = this->getChildByName(HURT_NAME);
+	pHurt->setContentSize(cocos2d::Size(0, 0));
 	this->setContentSize(sz);
 }
