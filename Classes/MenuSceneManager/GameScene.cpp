@@ -274,11 +274,11 @@ void GameScene::update(float dt)
 				continue;
 			}
 			float curx = agent->getPositionX();
-			if (curx + SHIP_DELTA_X <= m_touchXPos)
+			if (curx + SHIP_DELTA_X <= std::min(m_touchXPos, visibleSize.width - SPACE_SHIP_WIDTH / 2))
 			{
 				agent->setPositionX(curx + SHIP_DELTA_X);
 			}
-			else if (curx - SHIP_DELTA_X >= m_touchXPos)
+			else if (curx - SHIP_DELTA_X >= std::max(m_touchXPos, SPACE_SHIP_WIDTH / 2))
 			{
 				agent->setPositionX(curx - SHIP_DELTA_X);
 			}
