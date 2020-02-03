@@ -1,4 +1,4 @@
-# Install script for directory: F:/work/cocos/SpaceInvater/cocos2d/external/win32-specific/icon
+# Install script for directory: F:/work/cocos/SpaceInvader/cocos2d/external/win32-specific/icon
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

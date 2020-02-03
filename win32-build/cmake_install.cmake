@@ -1,4 +1,4 @@
-# Install script for directory: F:/work/cocos/SpaceInvater
+# Install script for directory: F:/work/cocos/SpaceInvader
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("F:/work/cocos/SpaceInvater/win32-build/engine/cocos/core/cmake_install.cmake")
+  include("F:/work/cocos/SpaceInvader/win32-build/engine/cocos/core/cmake_install.cmake")
 
 endif()
 
@@ -46,5 +46,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "F:/work/cocos/SpaceInvater/win32-build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "F:/work/cocos/SpaceInvader/win32-build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,4 +1,4 @@
-# Install script for directory: F:/work/cocos/SpaceInvater/cocos2d/external/win32-specific/MP3Decoder
+# Install script for directory: F:/work/cocos/SpaceInvader/cocos2d/external/win32-specific/MP3Decoder
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

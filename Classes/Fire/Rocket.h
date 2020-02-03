@@ -1,8 +1,6 @@
 #pragma once
 #include "SpriteBase.h"
 
-enum RocketType;
-
 class Rocket :
 	public SpriteBase
 {

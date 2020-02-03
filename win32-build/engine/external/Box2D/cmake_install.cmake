@@ -1,4 +1,4 @@
-# Install script for directory: F:/work/cocos/SpaceInvater/cocos2d/external/Box2D
+# Install script for directory: F:/work/cocos/SpaceInvader/cocos2d/external/Box2D
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

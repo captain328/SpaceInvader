@@ -1,4 +1,4 @@
-# Install script for directory: F:/work/cocos/SpaceInvater/cocos2d/external/recast
+# Install script for directory: F:/work/cocos/SpaceInvader/cocos2d/external/recast
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7C43EF12-66B0-318E-A739-BFCDC701003B}</ProjectGuid>
+    <ProjectGuid>{0124EDD9-4F45-3964-A985-2A1AD6C2D13C}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
@@ -102,10 +102,10 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="F:\work\cocos\SpaceInvater\cocos2d\external\edtaa3func\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule F:/work/cocos/SpaceInvater/cocos2d/external/edtaa3func/CMakeLists.txt</Message>
+    <CustomBuild Include="F:\work\cocos\SpaceInvader\cocos2d\external\edtaa3func\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule F:/work/cocos/SpaceInvader/cocos2d/external/edtaa3func/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SF:/work/cocos/SpaceInvater -BF:/work/cocos/SpaceInvater/win32-build --check-stamp-file F:/work/cocos/SpaceInvater/win32-build/engine/external/edtaa3func/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SF:/work/cocos/SpaceInvader -BF:/work/cocos/SpaceInvader/win32-build --check-stamp-file F:/work/cocos/SpaceInvader/win32-build/engine/external/edtaa3func/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -114,11 +114,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">F:\work\cocos\SpaceInvater\win32-build\engine\external\edtaa3func\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">F:\work\cocos\SpaceInvader\win32-build\engine\external\edtaa3func\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule F:/work/cocos/SpaceInvater/cocos2d/external/edtaa3func/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule F:/work/cocos/SpaceInvader/cocos2d/external/edtaa3func/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SF:/work/cocos/SpaceInvater -BF:/work/cocos/SpaceInvater/win32-build --check-stamp-file F:/work/cocos/SpaceInvater/win32-build/engine/external/edtaa3func/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SF:/work/cocos/SpaceInvader -BF:/work/cocos/SpaceInvader/win32-build --check-stamp-file F:/work/cocos/SpaceInvader/win32-build/engine/external/edtaa3func/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -127,11 +127,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">F:\work\cocos\SpaceInvater\win32-build\engine\external\edtaa3func\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">F:\work\cocos\SpaceInvader\win32-build\engine\external\edtaa3func\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule F:/work/cocos/SpaceInvater/cocos2d/external/edtaa3func/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule F:/work/cocos/SpaceInvader/cocos2d/external/edtaa3func/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SF:/work/cocos/SpaceInvater -BF:/work/cocos/SpaceInvater/win32-build --check-stamp-file F:/work/cocos/SpaceInvater/win32-build/engine/external/edtaa3func/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SF:/work/cocos/SpaceInvader -BF:/work/cocos/SpaceInvader/win32-build --check-stamp-file F:/work/cocos/SpaceInvader/win32-build/engine/external/edtaa3func/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -140,11 +140,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">F:\work\cocos\SpaceInvater\win32-build\engine\external\edtaa3func\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">F:\work\cocos\SpaceInvader\win32-build\engine\external\edtaa3func\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule F:/work/cocos/SpaceInvater/cocos2d/external/edtaa3func/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule F:/work/cocos/SpaceInvader/cocos2d/external/edtaa3func/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SF:/work/cocos/SpaceInvater -BF:/work/cocos/SpaceInvater/win32-build --check-stamp-file F:/work/cocos/SpaceInvater/win32-build/engine/external/edtaa3func/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SF:/work/cocos/SpaceInvader -BF:/work/cocos/SpaceInvader/win32-build --check-stamp-file F:/work/cocos/SpaceInvader/win32-build/engine/external/edtaa3func/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -153,21 +153,21 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">F:\work\cocos\SpaceInvater\win32-build\engine\external\edtaa3func\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">F:\work\cocos\SpaceInvader\win32-build\engine\external\edtaa3func\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="F:\work\cocos\SpaceInvater\win32-build\ZERO_CHECK.vcxproj">
-      <Project>{36A439D9-1C1D-3649-ADDC-EE8D23DB08BE}</Project>
+    <ProjectReference Include="F:\work\cocos\SpaceInvader\win32-build\ZERO_CHECK.vcxproj">
+      <Project>{C090A307-60A6-3037-BBD2-977FAF98A38B}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="F:\work\cocos\SpaceInvater\win32-build\engine\external\edtaa3func\ext_edtaa3func.vcxproj">
-      <Project>{7A19BE3A-C6B8-3BEE-AB6B-5995BDA147F4}</Project>
+    <ProjectReference Include="F:\work\cocos\SpaceInvader\win32-build\engine\external\edtaa3func\ext_edtaa3func.vcxproj">
+      <Project>{9064C315-BF67-3E74-8ED3-85B43712F8D8}</Project>
       <Name>ext_edtaa3func</Name>
     </ProjectReference>
   </ItemGroup>

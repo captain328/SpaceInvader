@@ -57,31 +57,31 @@ endif()
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
-     Classes/Scenes/GameScene.cpp
-     Classes/Pool/SpritePool.cpp
-     Classes/Base/SpriteBase.cpp
-     Classes/Friendly/SpaceShip.cpp
-     Classes/Weapons/Rocket.cpp
-     Classes/Managers/MenuManager.cpp
-     Classes/Enemys/LightEnemyShip.cpp
-     Classes/Enemys/HeavyEnemyShip.cpp
-     Classes/Scenes/GameOverScene.cpp
-     Classes/Enemys/Enemy.cpp
-     Classes/Managers/CollisionManager.cpp
+     Classes/MenuSceneManager/GameScene.cpp
+     Classes/MenuSceneManager/GameOverScene.cpp
+     Classes/MEnuSceneManager/MenuManager.cpp
+     Classes/Pooling/SpritePool.cpp
+     Classes/SpriteBase/SpriteBase.cpp
+     Classes/SpaceShip/SpaceShip.cpp
+     Classes/Fire/Rocket.cpp
+     Classes/EnemyManager/LightEnemyShip.cpp
+     Classes/EnemyManager/HeavyEnemyShip.cpp
+     Classes/EnemyManager/Enemy.cpp
+     Classes/CollisionManager/CollisionManager.cpp
      )
 list(APPEND GAME_HEADER
-     Classes/AppDelegate.h
-     Classes/Scenes/GameScene.h
-     Classes/Pool/SpritePool.h
-     Classes/Base/SpriteBase.h
-     Classes/Friendly/SpaceShip.h
-     Classes/Weapons/Rocket.h
-     Classes/Managers/MenuManager.h
-     Classes/Enemys/LightEnemyShip.h
-     Classes/Enemys/HeavyEnemyShip.h
-     Classes/Scenes/GameOverScene.h
-     Classes/Enemys/Enemy.h
-     Classes/Managers/CollisionManager.h
+     Classes/AppDelegate.cpp
+     Classes/MenuSceneManager/GameScene.cpp
+     Classes/MenuSceneManager/GameOverScene.cpp
+     Classes/MEnuSceneManager/MenuManager.cpp
+     Classes/Pooling/SpritePool.cpp
+     Classes/SpriteBase/SpriteBase.cpp
+     Classes/SpaceShip/SpaceShip.cpp
+     Classes/Fire/Rocket.cpp
+     Classes/EnemyManager/LightEnemyShip.cpp
+     Classes/EnemyManager/HeavyEnemyShip.cpp
+     Classes/EnemyManager/Enemy.cpp
+     Classes/CollisionManager/CollisionManager.cpp
      )
 
 if(ANDROID)
@@ -152,13 +152,13 @@ endif()
 target_link_libraries(${APP_NAME} cocos2d)
 target_include_directories(${APP_NAME}
         PRIVATE Classes
-        PRIVATE Classes/Base
-        PRIVATE Classes/Enemys
-        PRIVATE Classes/Friendly
-        PRIVATE Classes/Managers
-        PRIVATE Classes/Pool
-        PRIVATE Classes/Scenes
-        PRIVATE Classes/Weapons
+        PRIVATE Classes/SpriteBase
+        PRIVATE Classes/EnemyManager
+        PRIVATE Classes/SpaceShip
+        PRIVATE Classes/CollisionManager
+        PRIVATE Classes/Pooling
+        PRIVATE Classes/MenuSceneManager
+        PRIVATE Classes/Fire
         PRIVATE ${COCOS2DX_ROOT_PATH}/cocos/audio/include/
 )
 

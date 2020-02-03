@@ -17,12 +17,12 @@ C:/Program Files/CMake/share/cmake-3.16/Modules/Platform/Windows-MSVC-CXX.cmake
 C:/Program Files/CMake/share/cmake-3.16/Modules/Platform/Windows-MSVC.cmake
 C:/Program Files/CMake/share/cmake-3.16/Modules/Platform/Windows.cmake
 C:/Program Files/CMake/share/cmake-3.16/Modules/Platform/WindowsPaths.cmake
-F:/work/cocos/SpaceInvater/CMakeLists.txt
-F:/work/cocos/SpaceInvater/cocos2d/cmake/Modules/CocosBuildHelpers.cmake
-F:/work/cocos/SpaceInvater/cocos2d/cmake/Modules/CocosBuildSet.cmake
-F:/work/cocos/SpaceInvater/cocos2d/cmake/Modules/CocosConfigDefine.cmake
-F:/work/cocos/SpaceInvater/cocos2d/cmake/Modules/CocosConfigDepend.cmake
-F:/work/cocos/SpaceInvater/win32-build/CMakeFiles/3.16.3/CMakeCCompiler.cmake
-F:/work/cocos/SpaceInvater/win32-build/CMakeFiles/3.16.3/CMakeCXXCompiler.cmake
-F:/work/cocos/SpaceInvater/win32-build/CMakeFiles/3.16.3/CMakeRCCompiler.cmake
-F:/work/cocos/SpaceInvater/win32-build/CMakeFiles/3.16.3/CMakeSystem.cmake
+F:/work/cocos/SpaceInvader/CMakeLists.txt
+F:/work/cocos/SpaceInvader/cocos2d/cmake/Modules/CocosBuildHelpers.cmake
+F:/work/cocos/SpaceInvader/cocos2d/cmake/Modules/CocosBuildSet.cmake
+F:/work/cocos/SpaceInvader/cocos2d/cmake/Modules/CocosConfigDefine.cmake
+F:/work/cocos/SpaceInvader/cocos2d/cmake/Modules/CocosConfigDepend.cmake
+F:/work/cocos/SpaceInvader/win32-build/CMakeFiles/3.16.3/CMakeCCompiler.cmake
+F:/work/cocos/SpaceInvader/win32-build/CMakeFiles/3.16.3/CMakeCXXCompiler.cmake
+F:/work/cocos/SpaceInvader/win32-build/CMakeFiles/3.16.3/CMakeRCCompiler.cmake
+F:/work/cocos/SpaceInvader/win32-build/CMakeFiles/3.16.3/CMakeSystem.cmake
