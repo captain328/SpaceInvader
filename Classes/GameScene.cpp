@@ -253,8 +253,10 @@ void GameScene::update(float dt)
 	bool bEnemyExist = false;
 
 	Vector<Node*> children = this->getChildren();
-	for each (Node* child in children)
+	Vector<Node*>::iterator myIterator;
+	for (myIterator = children.begin(); myIterator != children.end(); ++myIterator)
 	{
+		auto child = *myIterator;
 		// no update for other sprites.
 		if (child->getTag() != TAG_SPACESHIP
 					&& child->getTag() != TAG_ENEMY_SHIP 

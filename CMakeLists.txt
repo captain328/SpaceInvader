@@ -57,11 +57,31 @@ endif()
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
-     Classes/HelloWorldScene.cpp
+     Classes/GameScene.cpp
+     Classes/SpritePool.cpp
+     Classes/SpriteBase.cpp
+     Classes/SpaceShip.cpp
+     Classes/Rocket.cpp
+     Classes/MenuManager.cpp
+     Classes/LightEnemyShip.cpp
+     Classes/HeavyEnemyShip.cpp
+     Classes/GameOverScene.cpp
+     Classes/Enemy.cpp
+     Classes/CollisionManager.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
-     Classes/HelloWorldScene.h
+     Classes/GameScene.h
+     Classes/SpritePool.h
+     Classes/SpriteBase.h
+     Classes/SpaceShip.h
+     Classes/Rocket.h
+     Classes/MenuManager.h
+     Classes/LightEnemyShip.h
+     Classes/HeavyEnemyShip.h
+     Classes/GameOverScene.h
+     Classes/Enemy.h
+     Classes/CollisionManager.h
      )
 
 if(ANDROID)

@@ -23,7 +23,7 @@
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
-    <ProjectName>SpaceInvader</ProjectName>
+    <ProjectName>SpaceInvater</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -58,7 +58,7 @@
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">F:\work\cocos\SpaceInvater\win32-build\bin\SpaceInvater\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">SpaceInvater.dir\Debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">SpaceInvader</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">SpaceInvater</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
@@ -113,8 +113,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <PostBuildEvent>
-      <Message>
-      </Message>
+      <Message>												</Message>
       <Command>setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different F:/work/cocos/SpaceInvater/cocos2d/external/openssl/prebuilt/win32/libssl-1_1.dll F:/work/cocos/SpaceInvater/win32-build/bin/SpaceInvater/Debug/libssl-1_1.dll
 if %errorlevel% neq 0 goto :cmEnd
@@ -279,8 +278,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <PostBuildEvent>
-      <Message>
-      </Message>
+      <Message>												</Message>
       <Command>setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different F:/work/cocos/SpaceInvater/cocos2d/external/openssl/prebuilt/win32/libssl-1_1.dll F:/work/cocos/SpaceInvater/win32-build/bin/SpaceInvater/Release/libssl-1_1.dll
 if %errorlevel% neq 0 goto :cmEnd
@@ -445,8 +443,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <PostBuildEvent>
-      <Message>
-      </Message>
+      <Message>												</Message>
       <Command>setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different F:/work/cocos/SpaceInvater/cocos2d/external/openssl/prebuilt/win32/libssl-1_1.dll F:/work/cocos/SpaceInvater/win32-build/bin/SpaceInvater/MinSizeRel/libssl-1_1.dll
 if %errorlevel% neq 0 goto :cmEnd
@@ -610,8 +607,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <PostBuildEvent>
-      <Message>
-      </Message>
+      <Message>												</Message>
       <Command>setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different F:/work/cocos/SpaceInvater/cocos2d/external/openssl/prebuilt/win32/libssl-1_1.dll F:/work/cocos/SpaceInvater/win32-build/bin/SpaceInvater/RelWithDebInfo/libssl-1_1.dll
 if %errorlevel% neq 0 goto :cmEnd
@@ -801,41 +797,53 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Classes\CollisionManager.h" />
-    <ClInclude Include="..\Classes\Enemy.h" />
-    <ClInclude Include="..\Classes\HeavyEnemyShip.h" />
-    <ClInclude Include="..\Classes\LightEnemyShip.h" />
-    <ClInclude Include="..\Classes\MenuManager.h" />
-    <ClInclude Include="..\Classes\Rocket.h" />
-    <ClInclude Include="..\Classes\SpaceShip.h" />
-    <ClInclude Include="..\Classes\SpriteBase.h" />
-    <ClInclude Include="..\Classes\SpritePool.h" />
-    <ClInclude Include="..\Classes\Config.h" />
-    <ClInclude Include="..\Classes\GameOverScene.h" />
     <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\GameScene.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\GameScene.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\SpritePool.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\SpriteBase.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\SpaceShip.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\Rocket.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\MenuManager.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\LightEnemyShip.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\HeavyEnemyShip.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\GameOverScene.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\Enemy.h" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Classes\CollisionManager.h" />
     <ClInclude Include="F:\work\cocos\SpaceInvater\proj.win32\main.h" />
     <ClInclude Include="F:\work\cocos\SpaceInvater\proj.win32\resource.h" />
-    <ClCompile Include="..\Classes\CollisionManager.cpp" />
-    <ClCompile Include="..\Classes\Enemy.cpp" />
-    <ClCompile Include="..\Classes\HeavyEnemyShip.cpp" />
-    <ClCompile Include="..\Classes\LightEnemyShip.cpp" />
-    <ClCompile Include="..\Classes\MenuManager.cpp" />
-    <ClCompile Include="..\Classes\Rocket.cpp" />
-    <ClCompile Include="..\Classes\SpaceShip.cpp" />
-    <ClCompile Include="..\Classes\SpriteBase.cpp" />
-    <ClCompile Include="..\Classes\SpritePool.cpp" />
-    <ClCompile Include="..\Classes\GameOverScene.cpp" />
     <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\GameScene.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\GameScene.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\SpritePool.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\SpriteBase.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\SpaceShip.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\Rocket.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\MenuManager.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\LightEnemyShip.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\HeavyEnemyShip.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\GameOverScene.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\Enemy.cpp" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\Classes\CollisionManager.cpp" />
     <ClCompile Include="F:\work\cocos\SpaceInvater\proj.win32\main.cpp" />
     <ResourceCompile Include="F:\work\cocos\SpaceInvater\proj.win32\game.rc" />
     <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\CloseNormal.png" />
     <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\CloseSelected.png" />
     <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\HelloWorld.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\background.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\btn_close_down.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\btn_close_normal.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\btn_exit_down.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\btn_exit_normal.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\btn_retry_down.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\btn_retry_normal.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\enemy1.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\enemy2.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\enemy2_hit.png" />
     <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\fonts\Marker Felt.ttf" />
     <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\fonts\arial.ttf" />
     <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\res\.gitkeep" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\rocket.png" />
+    <ClInclude Include="F:\work\cocos\SpaceInvater\Resources\self.png" />
+    <ClCompile Include="F:\work\cocos\SpaceInvater\cocos2d\cocos\precheader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="F:\work\cocos\SpaceInvater\win32-build\ZERO_CHECK.vcxproj">
