@@ -14,8 +14,12 @@
 
 USING_NS_CC;
 
+SpriteBatchNode* GameScene::spritebatch = nullptr;
+
+
 Scene* GameScene::createScene()
 {
+
 	auto scene = Scene::createWithPhysics();
 	scene->getPhysicsWorld()->setGravity(Vec2(0, 0));
 
@@ -23,6 +27,8 @@ Scene* GameScene::createScene()
 	layer->SetPhysicsWorld(scene->getPhysicsWorld());
 
 	scene->addChild(layer);
+
+	
 	return scene;
 }
 
@@ -35,30 +41,14 @@ bool GameScene::init()
     {
         return false;
     }
+	SpriteFrameCache* cache = SpriteFrameCache::getInstance();
+	cache->addSpriteFramesWithFile("sprites.plist");
+
 
 	CollisionManager::instance()->setGameScene(this);
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "btn_close_normal.png",
-                                           "btn_close_down.png",
-                                           CC_CALLBACK_1(GameScene::menuCloseCallback, this));
-
-    if (closeItem == nullptr ||
-        closeItem->getContentSize().width <= 0 ||
-        closeItem->getContentSize().height <= 0)
-    {
-		printf("'btn_close_normal.png' or 'btn_close_selected.png' is missing.");
-    }
-    else
-    {
-        float x = origin.x + visibleSize.width - closeItem->getContentSize().width/2;
-        float y = origin.y + closeItem->getContentSize().height/2;
-        closeItem->setPosition(Vec2(x,y));
-    }
 
     // add a label shows game title
     // create and initialize a label

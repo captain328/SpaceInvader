@@ -1,6 +1,7 @@
 
 #include "SpriteBase.h"
 #include "Config.h"
+#include "GameScene.h"
 USING_NS_CC;
 
 int SpriteBase::_spriteIncrement = 0;
@@ -8,7 +9,7 @@ int SpriteBase::_spriteIncrement = 0;
 SpriteBase::SpriteBase(float w, float h, std::string path)
 {
 	m_nSpriteId = _spriteIncrement++;
-	if (!Sprite::initWithFile(path))
+	if (!Sprite::initWithSpriteFrameName(path))
 	{
 		return;
 	}

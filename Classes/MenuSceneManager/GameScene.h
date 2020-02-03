@@ -11,6 +11,7 @@ class SpaceShip;
 class Enemy;
 class GameScene : public cocos2d::Scene
 {
+
 public:
     static cocos2d::Scene* createScene();
 
@@ -47,6 +48,10 @@ private:
 	cocos2d::PhysicsWorld *		m_sceneWorld;
 
 	std::map<int, Enemy*> m_enemies;
+
+public:
+	static cocos2d::SpriteBatchNode* spritebatch;
+
 };
 
 #endif // __HELLOWORLD_SCENE_H__

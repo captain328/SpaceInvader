@@ -30,17 +30,17 @@ void CollisionManager::setGameScene(GameScene* pScene)
 	pGameScene = pScene;
 }
 
-bool CollisionManager::handleContact(SpriteBase* p1, SpriteBase* p2)
+bool CollisionManager::handleContact(SpriteBase* shapeA, SpriteBase* shapeB)
 {
 	// in case of collision between rocket and ship
-	if ((p1->getTag() == TAG_ROCKET
-		&& p2->getTag() == TAG_ENEMY_SHIP)
-		|| (p2->getTag() == TAG_ROCKET
-			&& p1->getTag() == TAG_ENEMY_SHIP))
+	if ((shapeA->getTag() == TAG_ROCKET
+		&& shapeB->getTag() == TAG_ENEMY_SHIP)
+		|| (shapeB->getTag() == TAG_ROCKET
+			&& shapeA->getTag() == TAG_ENEMY_SHIP))
 	{
 		// rocket collide with enemy
-		Rocket* pRocket = (Rocket*)(p1->getTag() == TAG_ROCKET ? p1 : p2);
-		Enemy* pEnemyShip = (Enemy*)(p1->getTag() == TAG_ENEMY_SHIP ? p1 : p2);
+		Rocket* pRocket = (Rocket*)(shapeA->getTag() == TAG_ROCKET ? shapeA : shapeB);
+		Enemy* pEnemyShip = (Enemy*)(shapeA->getTag() == TAG_ENEMY_SHIP ? shapeA : shapeB);
 		Enemy* pEnemy = nullptr;
 		if (pEnemyShip->enemyType() == ENEMY_SHIP_HEAVY)
 		{
@@ -49,21 +49,18 @@ bool CollisionManager::handleContact(SpriteBase* p1, SpriteBase* p2)
 		else {
 			pEnemy = (LightEnemyShip*)pEnemyShip;
 		}
-		// force healthpoint reduction
 		pEnemy->getHit(pRocket);
 		if (pEnemy->isDead())
 		{
 			pGameScene->removeChild((SpriteBase*)pEnemyShip);
-			// it is dead and it has to be pushed into pool
 			SpritePool::instance()->push((SpriteBase*)pEnemyShip);
 			pGameScene->increaseScore();
 		}
 		pGameScene->removeChild(pRocket);
-		// rocket must go to pool once it is collided with someone
 		SpritePool::instance()->push(pRocket);
 	}
-	else if (p1->getTag() == TAG_SPACESHIP
-		|| p2->getTag() == TAG_SPACESHIP)
+	else if (shapeA->getTag() == TAG_SPACESHIP
+		|| shapeB->getTag() == TAG_SPACESHIP)
 	{	// collision between spaceship and enemyship
 		pGameScene->stopAllActions();
 		MenuManager::instance()->switchScene(SCENE_GAME_OVER);
