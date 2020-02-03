@@ -65,8 +65,6 @@ bool CollisionManager::handleContact(SpriteBase* p1, SpriteBase* p2)
 	else if (p1->getTag() == TAG_SPACESHIP
 		|| p2->getTag() == TAG_SPACESHIP)
 	{	// collision between spaceship and enemyship
-		// here is game over case
-		// collision between spaceship and enemyship
 		pGameScene->stopAllActions();
 		MenuManager::instance()->switchScene(SCENE_GAME_OVER);
 		return false;
