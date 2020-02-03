@@ -33,10 +33,6 @@
 #define HEAVY_ENEMY_HEALTH 100.f
 
 
-// agent sprite tag value
-#define AGENT_SELF_TAG		65440
-#define AGENT_ENEMY_TAG		65441
-#define AGENT_ROCKET_TAG	65442
 
 
 // sprite kind
@@ -51,8 +47,8 @@
 
 // Motion displacement
 #define SHIP_DELTA_X			20.f
-#define SHIP_DELTA_Y			1.5f
-#define ROCKET_DELTA_Y			14.f
+#define SHIP_DELTA_Y			0.8f
+#define ROCKET_DELTA_Y			8.f
 
 // Scene ids
 #define SCENE_GAME_PLAY 0
@@ -60,7 +56,7 @@
 
 
 // shoot speed
-#define ROCKET_RELOAD_RATE		.2f
+#define ROCKET_RELOAD_RATE		.1f
 
 // paths
 #define BACKGROUND_PATH "background.png"

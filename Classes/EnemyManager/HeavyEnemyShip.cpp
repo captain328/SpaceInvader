@@ -27,6 +27,6 @@ void HeavyEnemyShip::reset()
 {
 	this->m_health = m_fullHealth;
 	cocos2d::Size sz = this->getContentSize();
-	this->setTexture(m_normalImage);
+	this->initWithSpriteFrameName(m_hurtImage);
 	this->setContentSize(sz);
 }
