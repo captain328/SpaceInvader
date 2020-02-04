@@ -57,3 +57,8 @@ void RocketManager::addToPool(Rocket* pRocket)
 {
 	_rocketPool.returnObject((SimpleRocket*)pRocket);
 }
+
+RocketManager::~RocketManager()
+{
+	_rocketPool.destroy();
+}

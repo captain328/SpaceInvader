@@ -1,5 +1,5 @@
-F:/work/cocos/SpaceInvader/win32-build/CMakeFiles/SpaceInvater.dir
-F:/work/cocos/SpaceInvader/win32-build/CMakeFiles/SYNC_RESOURCE-SpaceInvater.dir
+F:/work/cocos/SpaceInvader/win32-build/CMakeFiles/SpaceInvader.dir
+F:/work/cocos/SpaceInvader/win32-build/CMakeFiles/SYNC_RESOURCE-SpaceInvader.dir
 F:/work/cocos/SpaceInvader/win32-build/CMakeFiles/ALL_BUILD.dir
 F:/work/cocos/SpaceInvader/win32-build/CMakeFiles/ZERO_CHECK.dir
 F:/work/cocos/SpaceInvader/win32-build/engine/cocos/core/CMakeFiles/cocos2d.dir

@@ -76,3 +76,8 @@ void HeroManager::onTouchEnded(float touchX, float touchY)
 	m_touchY = touchY;
 	m_bTouchBegan = false;
 }
+
+HeroManager::~HeroManager()
+{
+	delete m_pHeroShip;
+}

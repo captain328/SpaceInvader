@@ -166,15 +166,15 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="F:\work\cocos\SpaceInvader\win32-build\SYNC_RESOURCE-SpaceInvater.vcxproj">
-      <Project>{2FEE8485-6C41-3ED5-B6BE-F01E853053E3}</Project>
-      <Name>SYNC_RESOURCE-SpaceInvater</Name>
+    <ProjectReference Include="F:\work\cocos\SpaceInvader\win32-build\SYNC_RESOURCE-SpaceInvader.vcxproj">
+      <Project>{A31AE47A-D273-37B1-87A6-69B6D08E6BE0}</Project>
+      <Name>SYNC_RESOURCE-SpaceInvader</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="F:\work\cocos\SpaceInvader\win32-build\SpaceInvater.vcxproj">
-      <Project>{D0B3CBD6-9DA7-3C91-BE01-F2907ACABD25}</Project>
-      <Name>SpaceInvater</Name>
+    <ProjectReference Include="F:\work\cocos\SpaceInvader\win32-build\SpaceInvader.vcxproj">
+      <Project>{20947F1F-0E68-3A3D-96A5-88C7114EA9F4}</Project>
+      <Name>SpaceInvader</Name>
     </ProjectReference>
     <ProjectReference Include="F:\work\cocos\SpaceInvader\win32-build\engine\cocos\core\cocos2d.vcxproj">
       <Project>{AABE7382-A3A4-336B-BA92-3D9B66FE89F7}</Project>

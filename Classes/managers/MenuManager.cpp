@@ -44,3 +44,8 @@ void MenuManager::quit()
 {
 	Director::getInstance()->end();
 }
+
+MenuManager::~MenuManager()
+{
+
+}

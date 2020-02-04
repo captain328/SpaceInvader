@@ -129,3 +129,9 @@ void EnemyManager::kill(EnemyShip* pEnemy)
 		_lightEnemyPool.returnObject((LightEnemyShip*)pEnemy);
 	}
 }
+
+EnemyManager::~EnemyManager()
+{
+	_heavyEnemyPool.destroy();
+	_lightEnemyPool.destroy();
+}

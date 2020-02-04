@@ -7,6 +7,7 @@ private:
 	static MenuManager* _instance;
 public:
 	MenuManager();
+	~MenuManager();
 	static MenuManager* instance();
 	void switchScene(int nScene);
 	void quit();

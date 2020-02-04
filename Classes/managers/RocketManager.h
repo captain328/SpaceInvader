@@ -14,6 +14,7 @@ public:
 
 public:
 	RocketManager();
+	~RocketManager();
     void update(float dt);
 	void initialize(float visibleWidth, float visibleHeight, float originX, float originY);
 	void launch(float launchX, float launchY);

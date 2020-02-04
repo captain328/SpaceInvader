@@ -181,7 +181,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=SpaceInvater
+CMAKE_PROJECT_NAME:STATIC=SpaceInvader
 
 //RC compiler
 CMAKE_RC_COMPILER:FILEPATH=rc
@@ -283,6 +283,12 @@ OpenalSoft_SOURCE_DIR:STATIC=F:/work/cocos/SpaceInvader/cocos2d/external/win32-s
 
 //Path to a program.
 PYTHON_COMMAND:FILEPATH=C:/Users/bruce/AppData/Local/Programs/Python/Python38/python.exe
+
+//Value Computed by CMake
+SpaceInvader_BINARY_DIR:STATIC=F:/work/cocos/SpaceInvader/win32-build
+
+//Value Computed by CMake
+SpaceInvader_SOURCE_DIR:STATIC=F:/work/cocos/SpaceInvader
 
 //Value Computed by CMake
 SpaceInvater_BINARY_DIR:STATIC=F:/work/cocos/SpaceInvader/win32-build

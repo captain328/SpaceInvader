@@ -15,6 +15,7 @@ public:
 
 public:
 	EnemyManager();
+	~EnemyManager();
     void update(float dt);
 	void initialize(float visibleWidth, float visibleHeight, float originX, float originY);
 	void levelUp(int level=1);

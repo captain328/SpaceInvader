@@ -13,6 +13,7 @@ public:
 	void returnObject(T* obj) {
 		_pool.push_back(obj);
 	}
+	
 	T* getOne() {
 		if (_pool.empty()) {
 			return new T;
@@ -20,6 +21,13 @@ public:
 		T* first = _pool.front();
 		_pool.pop_front();
 		return first;
+	}
+
+	void destroy() {
+		std::list<T*>::iterator it;
+		for (it = _pool.begin(); it != _pool.end(); ++it) {
+			delete *it;
+		}
 	}
 
 protected:

@@ -12,6 +12,7 @@ private:
 public:
     static HeroManager* instance();
     HeroManager();
+	~HeroManager();
 	void update(float dt);
 	void initialize(float visibleWidth, float visibleHeight, float originX, float originY);
     HeroShip* heroShip() { return m_pHeroShip; }
