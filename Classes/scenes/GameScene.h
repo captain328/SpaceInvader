@@ -38,7 +38,7 @@ public:
 
     virtual bool init();
 	virtual void update(float dt);
-	void increaseScore();
+	void increaseScore(int scorePoint);
 	void SetPhysicsWorld(cocos2d::PhysicsWorld *world) { m_sceneWorld = world; };
 
 	// touch event listener

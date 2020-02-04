@@ -47,7 +47,7 @@
 
 // Motion displacement
 #define SHIP_DELTA_X			20.f
-#define SHIP_DELTA_Y			1.8f
+#define SHIP_DELTA_Y			2.1f
 #define ROCKET_DELTA_Y			8.f
 
 // Scene ids
@@ -67,3 +67,7 @@
 // collision case
 #define HERO_ENEMY_COLLISION 0
 #define ROCKET_ENEMY_COLLISION 1
+
+// scores
+#define HEAVY_ENEMY_SCORE 20
+#define LIGHT_ENEMY_SCORE 10

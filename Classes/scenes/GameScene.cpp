@@ -215,9 +215,9 @@ bool GameScene::onContactBegin(PhysicsContact &contact)
 	return true;
 }
 
-void GameScene::increaseScore()
+void GameScene::increaseScore(int scorePoint)
 {
 	int curscore = std::atoi(m_scoreLabel->getString().c_str());
-	curscore += 20;
+	curscore += scorePoint;
 	m_scoreLabel->setString(StringUtils::format("%d", curscore));
 }

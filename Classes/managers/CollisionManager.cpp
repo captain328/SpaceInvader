@@ -43,7 +43,7 @@ bool CollisionManager::handleRocketEnemyCollision(Rocket* pRocket, EnemyShip* pE
 	if (pEnemy->isDead())
 	{
 		EnemyManager::instance()->kill(pEnemy);
-		pGameScene->increaseScore();
+		pGameScene->increaseScore(pEnemy->scorePoint());
 	}
 	pGameScene->removeChild(pRocket);
 	return true;
