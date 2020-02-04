@@ -24,7 +24,7 @@ public:
 	}
 
 	void destroy() {
-		std::list<T*>::iterator it;
+		typename std::list<T*>::iterator it;
 		for (it = _pool.begin(); it != _pool.end(); ++it) {
 			delete *it;
 		}
