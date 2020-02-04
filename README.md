@@ -15,6 +15,9 @@ It uses following concepts.
 ## Starting guide
 
 ### Building Envirionment
+
+#### Windows installation
+
 download and install following.
 
 cocos2d-x 4.0(http://cocos2d-x.org/filedown/cocos2d-x-v4.0)
@@ -23,7 +26,7 @@ python 2.7(https://www.python.org/download/releases/2.7/)
 
 cmake(https://cmake.org/download/)
 
-visual studio 2017(In case you want work on visual studio)
+visual studio 2017
 
 ``` bash
 cd path/to/cocos2d-x
@@ -34,6 +37,6 @@ python setup.py
 ``` bash
 git clone https://github.com/captain328/SpaceInvaders.git
 cd SpaceInvaders
-cocos run . -p [win32|linux|...]
+cocos run . -p win32
 ```
 
