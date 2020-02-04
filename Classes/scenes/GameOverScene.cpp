@@ -2,7 +2,7 @@
 #include "GameOverScene.h"
 #include "GameScene.h"
 #include "MenuManager.h"
-#include "config.h"
+#include "Config.h"
 USING_NS_CC;
 
 Scene* GameOverScene::createScene()
