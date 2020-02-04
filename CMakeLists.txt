@@ -25,7 +25,7 @@
 
 cmake_minimum_required(VERSION 3.6)
 
-set(APP_NAME SpaceInvater)
+set(APP_NAME SpaceInvader)
 
 project(${APP_NAME})
 
@@ -35,7 +35,7 @@ if(XCODE)
     endif()
 endif()
 
-if(NOT DEFINED BUILD_ENGINE_DONE) # to test SpaceInvater into root project
+if(NOT DEFINED BUILD_ENGINE_DONE) # to test SpaceInvader into root project
     set(COCOS2DX_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cocos2d)
     set(CMAKE_MODULE_PATH ${COCOS2DX_ROOT_PATH}/cmake/Modules/)
 
@@ -57,31 +57,23 @@ endif()
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
-     Classes/MenuSceneManager/GameScene.cpp
-     Classes/MenuSceneManager/GameOverScene.cpp
-     Classes/MEnuSceneManager/MenuManager.cpp
-     Classes/Pooling/SpritePool.cpp
-     Classes/SpriteBase/SpriteBase.cpp
-     Classes/SpaceShip/SpaceShip.cpp
-     Classes/Fire/Rocket.cpp
-     Classes/EnemyManager/LightEnemyShip.cpp
-     Classes/EnemyManager/HeavyEnemyShip.cpp
-     Classes/EnemyManager/Enemy.cpp
-     Classes/CollisionManager/CollisionManager.cpp
+     Classes/scenes/GameScene.cpp
+     Classes/scenes/GameOverScene.cpp
+     Classes/objects/base/Enemy.cpp
+     Classes/objects/base/Rocket.cpp
+     Classes/objects/base/SpriteBase.cpp
+     Classes/objects/HeavyEnemyShip.cpp
+     Classes/objects/LightEnemyShip.cpp
+     Classes/objects/HeroShip.cpp
+     Classes/objects/SimpleRocket.cpp
+     Classes/managers/CollisionManager.cpp
+     Classes/managers/EnemyManager.cpp
+     Classes/managers/HeroManager.cpp
+     Classes/managers/MenuManager.cpp
+     Classes/managers/RocketManager.cpp
      )
 list(APPEND GAME_HEADER
-     Classes/AppDelegate.cpp
-     Classes/MenuSceneManager/GameScene.cpp
-     Classes/MenuSceneManager/GameOverScene.cpp
-     Classes/MEnuSceneManager/MenuManager.cpp
-     Classes/Pooling/SpritePool.cpp
-     Classes/SpriteBase/SpriteBase.cpp
-     Classes/SpaceShip/SpaceShip.cpp
-     Classes/Fire/Rocket.cpp
-     Classes/EnemyManager/LightEnemyShip.cpp
-     Classes/EnemyManager/HeavyEnemyShip.cpp
-     Classes/EnemyManager/Enemy.cpp
-     Classes/CollisionManager/CollisionManager.cpp
+     Classes/AppDelegate.h
      )
 
 if(ANDROID)
@@ -152,13 +144,12 @@ endif()
 target_link_libraries(${APP_NAME} cocos2d)
 target_include_directories(${APP_NAME}
         PRIVATE Classes
-        PRIVATE Classes/SpriteBase
-        PRIVATE Classes/EnemyManager
-        PRIVATE Classes/SpaceShip
-        PRIVATE Classes/CollisionManager
-        PRIVATE Classes/Pooling
-        PRIVATE Classes/MenuSceneManager
-        PRIVATE Classes/Fire
+        PRIVATE Classes/managers
+        PRIVATE Classes/managers/interface
+        PRIVATE Classes/objects/base
+        PRIVATE Classes/objects
+        PRIVATE Classes/pool
+        PRIVATE Classes/scenes
         PRIVATE ${COCOS2DX_ROOT_PATH}/cocos/audio/include/
 )
 

@@ -39,7 +39,7 @@
 #define TAG_GENERAL		0
 #define TAG_ENEMY_SHIP	1
 #define TAG_ROCKET		2
-#define TAG_SPACESHIP	3
+#define TAG_HEROSHIP	3
 
 #define ENEMY_SHIP_HEAVY 0
 #define ENEMY_SHIP_LIGHT 1
@@ -47,7 +47,7 @@
 
 // Motion displacement
 #define SHIP_DELTA_X			20.f
-#define SHIP_DELTA_Y			0.8f
+#define SHIP_DELTA_Y			1.8f
 #define ROCKET_DELTA_Y			8.f
 
 // Scene ids
@@ -62,3 +62,8 @@
 #define BACKGROUND_PATH "background.png"
 
 #define HURT_NAME "hurt"
+
+
+// collision case
+#define HERO_ENEMY_COLLISION 0
+#define ROCKET_ENEMY_COLLISION 1

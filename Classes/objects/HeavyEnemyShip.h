@@ -5,13 +5,14 @@
 
 class Rocket;
 
-class HeavyEnemyShip : public Enemy
+class HeavyEnemyShip : public EnemyShip
 {
 private:
 	std::string m_normalImage;
 	std::string m_hurtImage;
 public:
-	HeavyEnemyShip(float health, float width, float height, std::string path);
+	HeavyEnemyShip();
+	~HeavyEnemyShip(){ }
 	virtual void getHit(Rocket* pRocket);
 	void reset();
 	

@@ -1,6 +1,12 @@
-win32-build
 *.filters
 *.user
 *.ipch
 bin
 cocos2d
+build
+*.obj
+*.pdb
+*.rar
+win32-build
+*.obj
+*.pdb

@@ -3,6 +3,9 @@
 
 class GameScene;
 class SpriteBase;
+class HeroShip;
+class EnemyShip;
+class Rocket;
 
 class CollisionManager
 {
@@ -13,6 +16,7 @@ public:
 	CollisionManager();
 	void setGameScene(GameScene* pScene);
 	static CollisionManager* instance();
-	bool handleContact(SpriteBase* p1, SpriteBase* p2);
+	bool handleHeroEnemyCollision(HeroShip* pHero, EnemyShip* pEnemy);
+	bool handleRocketEnemyCollision(Rocket* pRocket, EnemyShip* pEnemy);
 };
 

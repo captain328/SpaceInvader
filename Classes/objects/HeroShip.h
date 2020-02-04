@@ -3,10 +3,10 @@
 
 class Rocket;
 
-class SpaceShip :
+class HeroShip :
 	public SpriteBase
 {
 public:
-	SpaceShip(float width, float height, std::string path);
+	HeroShip();
 	Rocket* fire();
 };

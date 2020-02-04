@@ -2,15 +2,13 @@
 #include "Rocket.h"
 #include "Config.h"
 
-HeavyEnemyShip::HeavyEnemyShip(float health, float width, float height, std::string path)
-	: Enemy(health, width, height, path)
+HeavyEnemyShip::HeavyEnemyShip()
+	: EnemyShip(HEAVY_ENEMY_HEALTH, HEAVY_ENEMY_WIDTH, HEAVY_ENEMY_HEIGHT, HEAVY_ENEMY_PATH)
 {
-	setTag(TAG_ENEMY_SHIP);
 	m_hurtImage = HEAVY_ENEMY_HIT_PATH;
-	m_normalImage = path;
+	m_normalImage = HEAVY_ENEMY_PATH;
 	m_enemyType = ENEMY_SHIP_HEAVY;
-	// EnemyShip has to be displayed as flipped
-	setFlippedY(true);
+
 	Sprite* pHurt = Sprite::createWithSpriteFrameName(m_hurtImage);
 	pHurt->setName(HURT_NAME);
 	pHurt->setAnchorPoint(cocos2d::Vec2(0, 0));
