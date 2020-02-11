@@ -8,13 +8,3 @@ LightEnemyShip::LightEnemyShip()
 	m_enemyType = ENEMY_SHIP_LIGHT;
 }
 
-void LightEnemyShip::reset()
-{
-	this->m_health = m_fullHealth;
-}
-
-void LightEnemyShip::getHit(Rocket*)
-{
-	// light enemy ship gets destroy instantly it is hit
-	m_health = 0;
-}

@@ -13,8 +13,11 @@ protected:
 public:
 	EnemyShip(float health, float width, float height, std::string path, int scorePoint);
 	bool isDead() { return m_health <= 0; }
-	virtual void getHit(Rocket* pRocket) = 0;
+	virtual void getHit(Rocket* pRocket);
+	virtual void reset();
 	int enemyType() { return m_enemyType; }
 	int scorePoint() { return m_scorePoint; }
+private:
+	void resetHealthBar();
 };
 

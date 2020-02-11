@@ -30,22 +30,22 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{128,0},{128,128}}</string>
+                <string>{{0,128},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>enemy2_hit.png</key>
+            <key>health_bar.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{128,128}</string>
+                <string>{106,9}</string>
                 <key>spriteSourceSize</key>
-                <string>{128,128}</string>
+                <string>{106,9}</string>
                 <key>textureRect</key>
-                <string>{{256,0},{128,128}}</string>
+                <string>{{0,256},{106,9}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{32,64}</string>
                 <key>textureRect</key>
-                <string>{{384,0},{32,64}}</string>
+                <string>{{0,265},{32,64}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{416,0},{128,128}}</string>
+                <string>{{0,329},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -91,9 +91,9 @@
             <key>realTextureFileName</key>
             <string>sprites.png</string>
             <key>size</key>
-            <string>{544,128}</string>
+            <string>{128,457}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9f987888c95ec83970c6cfd277c75d37:4946a6f2fcaea6f28b918a9077bfb598:db71e206b3c010bfb176561963c50b15$</string>
+            <string>$TexturePacker:SmartUpdate:6dcd2d02c0d221c8bbb32e0615a9a267:c18a74c814541298c047c68e67b517e0:db71e206b3c010bfb176561963c50b15$</string>
             <key>textureFileName</key>
             <string>sprites.png</string>
         </dict>

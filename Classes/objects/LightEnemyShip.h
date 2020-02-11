@@ -12,7 +12,4 @@ private:
 	std::string m_hurtImage;
 public:
 	LightEnemyShip();
-	virtual void getHit(Rocket* pRocket);
-	void reset();
-	
 };

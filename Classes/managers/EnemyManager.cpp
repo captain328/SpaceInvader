@@ -31,6 +31,7 @@ void EnemyManager::update(float dt)
 		{
 			// enemy is not in visible area
 			pGameScene->removeChild(pEnemy);
+			pEnemy->reset();
 			removeArray.push_back(pEnemy);
 			addToPool(pEnemy);
 		}
@@ -42,7 +43,6 @@ void EnemyManager::update(float dt)
 
 	for (it = removeArray.begin(); it != removeArray.end(); ++it) {
 		EnemyShip* pShip = *it;
-		pShip->reset();
 		pEnemies.remove(pShip);
 	}
 
@@ -120,10 +120,9 @@ void EnemyManager::kill(EnemyShip* pEnemy)
 {
 	pEnemies.remove(pEnemy);
 	this->pGameScene->removeChild(pEnemy);
+	pEnemy->reset();
 	if (pEnemy->enemyType() == ENEMY_SHIP_HEAVY) {
-		HeavyEnemyShip* pHeavy = (HeavyEnemyShip*)pEnemy;
-		pHeavy->reset();
-		_heavyEnemyPool.returnObject(pHeavy);
+		_heavyEnemyPool.returnObject((HeavyEnemyShip*)pEnemy);
 	}
 	else {
 		_lightEnemyPool.returnObject((LightEnemyShip*)pEnemy);

@@ -13,7 +13,4 @@ private:
 public:
 	HeavyEnemyShip();
 	~HeavyEnemyShip(){ }
-	virtual void getHit(Rocket* pRocket);
-	void reset();
-	
 };

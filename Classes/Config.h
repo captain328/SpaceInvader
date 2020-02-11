@@ -22,6 +22,7 @@
 #define LIGHT_ENEMY_PATH "enemy1.png"
 #define HEAVY_ENEMY_PATH "enemy2.png"
 #define HEAVY_ENEMY_HIT_PATH "enemy2_hit.png"
+#define HEALTH_BAR_PATH "health_bar.png"
 
 #define ROCKET_PATH "rocket.png"
 
@@ -62,6 +63,7 @@
 #define BACKGROUND_PATH "background.png"
 
 #define HURT_NAME "hurt"
+#define HEALTH_BAR "health_bar"
 
 
 // collision case
