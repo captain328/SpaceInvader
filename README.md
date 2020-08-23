@@ -38,7 +38,7 @@ If you are new to `cocos2d-x` I recommend following this [article](https://www.r
 
 ``` bash
 cocos new -l cpp -d /path/to/project/dir SpaceInvaders
-git clone https://github.com/triaton/SpaceInvaders.git SpaceInvaders_temp
+git clone https://github.com/triaton/space-invaders.git SpaceInvaders_temp
 ```
 Copy all files and directories in `SpaceInvaders_temp` to `SpaceInvaders`.<br/>
 (If you want to continue with my git history, be sure to copy hidden `.git` directory as well.) <br/>
