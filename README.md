@@ -1,7 +1,7 @@
 # Space Invaders game focussed on Design Pattern
 cocos2d-x is a multi-platfrom framework building 2d games.
 
-This program is focussed on Game Design Pattern.
+This project is focussed on Game Design Pattern.
 
 It uses following concepts.
 * SOLID principle
